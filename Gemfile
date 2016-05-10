@@ -37,6 +37,7 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'rspec-core', '~> 3.4.4'
+  gem 'faker'
 end
 
 group :development do
