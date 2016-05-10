@@ -1,1 +1,13 @@
-<h1> Hello World </h1>
+<h1> Items for Sale </h1>
+<button type="button" class="btn btn-success">Add Item</button>
+<ul>
+  <% @items.each do |item| %>
+    <li>
+      <%= item.name %> : <%= item.price %>
+      <button type="button" class="btn btn-primary btn-sm">Buy Now!</button>
+      <br>
+      <%= item.description %>
+    </li>
+  <% end %>
+</ul>
+

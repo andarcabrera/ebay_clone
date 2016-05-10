@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'items#index'
 
+  get "/new_item" => "items#create"
   # Example of regular route:
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
