@@ -19,5 +19,11 @@ describe ItemsController do
     post :create
     expect(response).to have_http_status(:success)
   end
+
+  xit "creates a new item" do
+    post :new_item, :item => {name: "a", description: "A", price: 1, email: "a"}
+
+    expect(response.content_type).to eq("application/json")
+  end
 end
 
