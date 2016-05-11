@@ -11,23 +11,30 @@ describe Item do
     Item.destroy_all
   end
 
-  it 'has a name' do
+  it "has a name" do
 
     expect(@item.name).to eq("socks")
   end
 
-  it 'has a description' do
+  it "has a description" do
 
     expect(@item.description).to eq("they come in pairs")
   end
 
-  it 'has a price' do
+  it "has a price" do
 
     expect(@item.price).to eq(10)
   end
 
-  it 'has an email' do
+  it "has an email" do
 
     expect(@item.email).to eq("someone@gmail.com")
+  end
+
+  it "doesn't save without a name" do
+    item = Item.create(description: "Hi", price: 12, email: "hello")
+    item.save
+    item.valid?
+    expect(item.errors).to include(:name)
   end
 end
