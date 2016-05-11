@@ -37,4 +37,25 @@ describe Item do
     item.valid?
     expect(item.errors).to include(:name)
   end
+
+  it "doesn't save without a description" do
+    item = Item.create(name: "Jerome", price: 12, email: "hello")
+    item.save
+    item.valid?
+    expect(item.errors).to include(:description)
+  end
+
+  it "doesn't save without a price" do
+    item = Item.create(name: "Jerome", description: "hot water", email: "hello")
+    item.save
+    item.valid?
+    expect(item.errors).to include(:price)
+  end
+
+  it "doesn't save without a email" do
+    item = Item.create(name: "Jerome", description: "hot water", price: 14)
+    item.save
+    item.valid?
+    expect(item.errors).to include(:email)
+  end
 end
