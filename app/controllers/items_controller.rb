@@ -3,9 +3,20 @@ class ItemsController < ApplicationController
     @items = Item.all
   end
 
-  def create
+  def new
     @item = Item.new
-    render "new"
   end
 
+  def create
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to :root
+    else
+      render :new
+    end
+  end
+
+  def item_params
+    params.require(:item).permit(:name, :description, :price, :email)
+  end
 end
