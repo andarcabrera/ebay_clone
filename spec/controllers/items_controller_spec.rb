@@ -6,6 +6,8 @@ describe ItemsController do
 
     get :index
     expect(response).to have_http_status(:success)
+    expect(response.content_type).to eq("text/html")
+    expect(response).to render_template(:index)
   end
 
   it "calls the new action" do
@@ -20,10 +22,10 @@ describe ItemsController do
     expect(response).to have_http_status(:success)
   end
 
-  xit "creates a new item" do
-    post :new_item, :item => {name: "a", description: "A", price: 1, email: "a"}
+  it "creates a new item" do
+    post :create, :item => {name: "a", description: "A", price: 1, email: "a"}
 
-    expect(response.content_type).to eq("application/json")
+    expect(response.content_type).to eq("text/html")
   end
 end
 
