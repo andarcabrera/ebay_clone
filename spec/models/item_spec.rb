@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Item do
 
   before(:each) do
-     Item.find_or_create_by(name: "socks", description: "they come in pairs", price: 10, email: "someone@gmail.com")
+    Item.find_or_create_by(name: "socks", description: "they come in pairs", price: 10, email: "someone@gmail.com")
      @item = Item.first
   end
 

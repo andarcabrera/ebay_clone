@@ -9,5 +9,8 @@
   <%= f.text_field :price %>
   <%= f.label :email %>
   <%= f.text_field :email %>
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+  <%= f.hidden_field :image_cache %>
   <%= f.submit "Create" %>
 <% end %>
