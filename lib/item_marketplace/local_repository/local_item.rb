@@ -12,5 +12,9 @@ module LocalRepository
       @image = item_details[:image]
       @id = item_details[:id]
     end
+
+    def valid?
+      @id !=nil && @name != nil && @description != nil && @price != nil && @email != nil
+    end
   end
 end

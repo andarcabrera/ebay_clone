@@ -17,8 +17,13 @@ module LocalRepository
 
     def save(item)
       item.id = @id
-      @items[@id] = item
-      @id += 1
+      if  item.valid?
+        @items[@id] = item
+        @id += 1
+        item
+      else
+        false
+      end
     end
 
     def all

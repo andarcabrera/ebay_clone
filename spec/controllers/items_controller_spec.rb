@@ -1,10 +1,7 @@
+require 'item_marketplace/local_repository/local_item_repository'
 require 'rails_helper'
 
 describe ItemsController do
-
-  after(:each) do
-    Item.destroy_all
-  end
 
   it "handles request to home page" do
     get :index
@@ -27,7 +24,7 @@ describe ItemsController do
 
     expect(response.content_type).to eq("text/html")
     expect(response).to redirect_to(:root)
-    expect(Item.count).to eq(1)
+    expect(RepositoryContainer.get_repo(:item).all.count).to eq(1)
   end
 
   it "handles request to create item with invalid params" do
@@ -35,7 +32,7 @@ describe ItemsController do
 
     expect(response.content_type).to eq("text/html")
     expect(response).to render_template(:new)
-    expect(Item.count).to eq(0)
+    expect(RepositoryContainer.get_repo(:item).all.count).to eq(0)
   end
 end
 
