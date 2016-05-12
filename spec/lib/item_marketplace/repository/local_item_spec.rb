@@ -1,4 +1,4 @@
-require_relative '../../../lib/item_marketplace/local_item'
+require 'item_marketplace/local_repository/local_item'
 require 'rails_helper'
 
 describe LocalRepository::LocalItem do

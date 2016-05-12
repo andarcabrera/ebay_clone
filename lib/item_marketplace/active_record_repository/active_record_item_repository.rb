@@ -1,17 +1,17 @@
-require_relative 'local_item'
+require 'item_marketplace/active_record_repository/item'
 
-module LocalRepository
-  class LocalItemRepository
+module ActiveRecordRepository
+  class ItemRepository
     def initialize
       @items = {}
       @id = 1
     end
 
     def model_class
-      LocalRepository::LocalItem
+      ActiveRecordRepository::Item
     end
 
-    def new(item_details = {})
+    def new_item(item_details = {})
       model_class.new(item_details)
     end
 
@@ -30,3 +30,4 @@ module LocalRepository
     end
   end
 end
+
