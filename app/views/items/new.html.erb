@@ -1,16 +1,22 @@
 <h2> Add Item </h2>
 
-<%= form_for @item, url: {action: "create"} do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :description %>
-  <%= f.text_area :description %>
-  <%= f.label :price %>
-  <%= f.text_field :price %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <%= f.label :image %>
-  <%= f.file_field :image %>
-  <%= f.hidden_field :image_cache %>
-  <%= f.submit "Create" %>
+<%= form_tag({controller: "items", action: "create", method: "post"}, multipart: true ) do  %>
+
+  <%= label_tag :name %>
+  <%= text_field(:item, :name) %>
+
+  <%= label_tag :description %>
+  <%= text_area(:item, :description) %>
+
+  <%= label_tag :price %>
+  <%= text_field(:item, :price) %>
+
+  <%= label_tag :email %>
+  <%= email_field(:item, :email) %>
+
+  <%= label_tag :image %>
+  <%= file_field_tag('item[image]') %>
+  <%= hidden_field(:item, :image_cache) %>
+
+  <%= submit_tag "Add Item", class: "btn btn-large btn-primary" %>
 <% end %>

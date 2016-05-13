@@ -2,12 +2,12 @@ require 'item_marketplace/active_record_repository/item'
 
 module ActiveRecordRepository
   class ItemRepository
-
     def model_class
       ActiveRecordRepository::Item
     end
 
     def new_item(item_details = {})
+      puts item_details
       model_class.new(item_details)
     end
 
