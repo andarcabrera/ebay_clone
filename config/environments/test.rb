@@ -1,4 +1,5 @@
 require 'repository_container'
+require 'item_marketplace/local_repository/local_item_repository'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.

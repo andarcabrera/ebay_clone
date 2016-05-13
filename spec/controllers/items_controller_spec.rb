@@ -3,6 +3,10 @@ require 'rails_helper'
 
 describe ItemsController do
 
+  after(:each) do
+    RepositoryContainer.get_repo(:item).delete_all
+  end
+
   it "handles request to home page" do
     get :index
 
@@ -28,7 +32,7 @@ describe ItemsController do
   end
 
   it "handles request to create item with invalid params" do
-    post :create, :item => {name: "", description: "A", price: 1, email: "a"}
+    post :create, :item => {description: "A", price: 1, email: "a"}
 
     expect(response.content_type).to eq("text/html")
     expect(response).to render_template(:new)

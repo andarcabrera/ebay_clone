@@ -16,7 +16,7 @@ shared_examples_for "item repositories" do
     repository.save(item1)
     repository.save(item2)
 
-    expect(repository.find_by(2)).to eq(item2)
+    expect(repository.find_by({name: "shades2"})).to eq(item2)
   end
 
 end

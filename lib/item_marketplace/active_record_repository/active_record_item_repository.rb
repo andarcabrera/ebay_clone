@@ -2,10 +2,6 @@ require 'item_marketplace/active_record_repository/item'
 
 module ActiveRecordRepository
   class ItemRepository
-    def initialize
-      @items = {}
-      @id = 1
-    end
 
     def model_class
       ActiveRecordRepository::Item
@@ -16,18 +12,17 @@ module ActiveRecordRepository
     end
 
     def save(item)
-      item.id = @id
-      @items[@id] = item
-      @id += 1
+      item.save
     end
 
     def all
-      @items
+      model_class.all
     end
 
-    def find_by(item_id)
-      @items[item_id]
+    def find_by(name)
+      model_class.find_by(name)
     end
+
   end
 end
 

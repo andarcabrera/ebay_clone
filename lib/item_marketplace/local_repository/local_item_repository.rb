@@ -30,8 +30,13 @@ module LocalRepository
       @items
     end
 
-    def find_by(item_id)
-      @items[item_id]
+    def find_by(name)
+      @items.values.find {|item| item.name == name[:name]}
     end
+
+    def delete_all
+      @items = {}
+    end
+
   end
 end
