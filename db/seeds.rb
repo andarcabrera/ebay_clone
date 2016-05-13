@@ -1,7 +1,16 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'faker'
+require 'item_marketplace/active_record_repository/item'
+
+10.times do
+ ActiveRecordRepository::Item.find_or_create_by(name: Faker::Lorem.word,
+                                                description: Faker::Lorem.paragraph,
+                                                price: Faker::Number.number(2),
+                                                email: Faker::Internet.email,
+                                                image: Faker::Avatar.image)
+end
+
+ ActiveRecordRepository::Item.find_or_create_by(name: "computer",
+                                                description: "gray",
+                                                price: 15,
+                                                email: Faker::Internet.email,
+                                                image: Faker::Avatar.image)

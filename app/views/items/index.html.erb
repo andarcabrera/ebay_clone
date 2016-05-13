@@ -1,0 +1,13 @@
+<h1> Items for Sale </h1>
+<a class="btn btn-success" href="/new_item" role="button">Add Item</a>
+<ul>
+  <% @presenter.items.each do |item| %>
+    <li>
+      <%= item.name %> : <%= item.price %> <%= image_tag(item.image, size: "100") %>
+      <button type="button" class="btn btn-primary btn-sm">Buy Now!</button>
+      <br>
+      <%= item.description %>
+    </li>
+  <% end %>
+</ul>
+

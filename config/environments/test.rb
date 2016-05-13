@@ -1,3 +1,6 @@
+require 'repository_container'
+require 'item_marketplace/local_repository/local_item_repository'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -6,6 +9,8 @@ Rails.application.configure do
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs. Don't rely on the data there!
   config.cache_classes = true
+
+  RepositoryContainer.add(:item, LocalRepository::ItemRepository.new)
 
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that
