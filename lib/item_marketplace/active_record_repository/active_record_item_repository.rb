@@ -7,7 +7,6 @@ module ActiveRecordRepository
     end
 
     def new_item(item_details = {})
-      puts item_details
       model_class.new(item_details)
     end
 
