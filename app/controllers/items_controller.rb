@@ -1,15 +1,18 @@
+require 'item_marketplace/presenters/items_index_presenter'
+require 'item_marketplace/presenters/new_item_presenter'
+
 class ItemsController < ApplicationController
   def index
-    @items = Item.all
+    @presenter = ItemsIndexPresenter.new(Item.all)
   end
 
   def new
-    @item = Item.new
+    @presenter = NewItemPresenter.new(Item.new)
   end
 
   def create
-    @item = Item.new(item_params)
-    if @item.save
+    @presenter = NewItemPresenter.new(Item.new(item_params))
+    if @presenter.item.save
       redirect_to :root
     else
       render :new

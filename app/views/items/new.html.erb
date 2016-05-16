@@ -1,6 +1,6 @@
 <h2> Add Item </h2>
 
-<%= form_for @item, url: {action: "create"} do |f| %>
+<%= form_for @presenter.item, url: {action: "create"} do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.label :description %>
