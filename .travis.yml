@@ -4,7 +4,3 @@ rvm:
 
 before_script:
     - psql -c 'create database ebay_clone_test;' -U postgres
-
-test:
-  adapter: postgresql
-  database: ebay_clone_test
