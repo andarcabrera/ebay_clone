@@ -1,0 +1,8 @@
+<h2> Buy Item </h2>
+
+<%= form_for @purchase, url: {action: "create"} do |f| %>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  <%= f.hidden_field :item_id, value: @item.id %>
+  <%= f.submit "Buy" %>
+<% end %>
