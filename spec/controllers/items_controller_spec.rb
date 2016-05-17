@@ -2,36 +2,78 @@ require 'rails_helper'
 
 describe ItemsController do
 
-  it "handles request to home page" do
-    get :index
+  context "request for home page" do
 
-    expect(response).to have_http_status(:success)
-    expect(response.content_type).to eq("text/html")
-    expect(response).to render_template(:index)
+    it "response is successful" do
+      get :index
+
+      expect(response).to have_http_status(:success)
+      expect(response.content_type).to eq("text/html")
+    end
+
+    it "renders the index template" do
+      get :index
+
+      expect(response).to render_template(:index)
+    end
   end
 
-  it "handles request to go to create new item page" do
-    get :new
+  context "request for new item" do
+    it "response is successful" do
+      get :new
 
-    expect(response).to have_http_status(:success)
-    expect(response.content_type).to eq("text/html")
-    expect(response).to render_template(:new)
+      expect(response).to have_http_status(:success)
+      expect(response.content_type).to eq("text/html")
+    end
+
+    it "renders the new template" do
+      get :new
+
+      expect(response).to render_template(:new)
+    end
   end
 
-  it "handles request to create new item" do
-    post :create, :item => {name: "a", description: "A", price: 1, email: "a"}
+  context "new item is created successfully" do
+    it "response is successful" do
+      post :create, :item => {name: "a", description: "A", price: 1, email: "a"}
 
-    expect(response.content_type).to eq("text/html")
-    expect(response).to redirect_to(:root)
-    expect(Item.count).to eq(1)
+      expect(response).to have_http_status(:redirect)
+      expect(response.content_type).to eq("text/html")
+    end
+
+    it "redirects to the root" do
+      post :create, :item => {name: "a", description: "A", price: 1, email: "a"}
+
+      expect(response).to redirect_to(:root)
+    end
+
+    it "adds the item to the database" do
+      post :create, :item => {name: "ping-pong paddle", description: "you beat Alex with it", price: 1, email: "a"}
+
+      expect(Item.first.name).to eq("ping-pong paddle")
+      expect(Item.count).to eq(1)
+    end
   end
 
-  it "handles request to create item with invalid params" do
-    post :create, :item => {name: "", description: "A", price: 1, email: "a"}
+  context "new item is invalid and not created" do
+    it "response is successful" do
+      post :create, :item => {name: "", description: "A", price: 1, email: "a"}
 
-    expect(response.content_type).to eq("text/html")
-    expect(response).to render_template(:new)
-    expect(Item.count).to eq(0)
+      expect(response).to have_http_status(:success)
+      expect(response.content_type).to eq("text/html")
+    end
+
+    it "renders the new template" do
+      post :create, :item => {name: "", description: "A", price: 1, email: "a"}
+
+      expect(response).to render_template(:new)
+    end
+
+    it "does not save the item to the database" do
+      post :create, :item => {name: "", description: "A", price: 1, email: "a"}
+
+      expect(Item.count).to eq(0)
+    end
   end
 end
 
