@@ -2,10 +2,6 @@ require 'rails_helper'
 
 describe ItemsController do
 
-  after(:each) do
-    Item.destroy_all
-  end
-
   it "handles request to home page" do
     get :index
 

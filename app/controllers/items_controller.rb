@@ -3,7 +3,7 @@ require 'item_marketplace/presenters/new_item_presenter'
 
 class ItemsController < ApplicationController
   def index
-    @presenter = ItemsIndexPresenter.new(Item.all)
+    @presenter = ItemsIndexPresenter.new(Item.limit(100))
   end
 
   def new
