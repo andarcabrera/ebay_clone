@@ -7,10 +7,6 @@ describe Item do
     @item = Item.first
   end
 
-  after(:each) do
-    Item.destroy_all
-  end
-
   it "has a name" do
 
     expect(@item.name).to eq("socks")
