@@ -4,7 +4,7 @@
   <% @presenter.items.each do |item| %>
     <li>
       <%= item.name %> : <%= item.price %> <%= image_tag(item.image, size: "100") %>
-      <button type="button" class="btn btn-primary btn-sm">Buy Now!</button>
+      <a class="btn btn-primary btn-sm" href="items/<%= item.id %>/purchases/new" role="button">Buy Now!</a>
       <br>
       <%= item.description %>
     </li>
