@@ -17,7 +17,6 @@ group :development, :test do
   gem 'rspec-core', '~> 3.4.4'
   gem 'faker'
   gem 'pry'
-  gem 'database_cleaner'
 end
 
 group :development do
