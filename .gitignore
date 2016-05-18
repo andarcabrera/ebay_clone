@@ -3,4 +3,3 @@
 !/log/.keep
 /tmp
 /public/uploads
-/config/secrets.yml
