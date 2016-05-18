@@ -3,5 +3,5 @@ Rails.application.routes.draw do
  get  "/items/new"                =>  "items#new"
  post "/items"                    =>  "items#create"
  get  "/items/:id/purchases/new"  =>  "purchases#new"
- post  "/purchases"                =>  "purchases#create"
+ post  "/purchases"               =>  "purchases#create"
 end

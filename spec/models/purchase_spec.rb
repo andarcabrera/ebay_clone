@@ -33,7 +33,6 @@ describe Purchase do
     end
   end
 
-
   private
 
   def create_invalid_purchase(purchase_details)
