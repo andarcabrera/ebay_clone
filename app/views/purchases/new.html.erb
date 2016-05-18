@@ -3,10 +3,10 @@
 </div>
 
 <div class="container  text-center new-item-form">
-  <%= form_for @purchase, url: {action: "create"} do |f| %>
+  <%= form_for @presenter.purchase, url: {action: "create"} do |f| %>
     <%= f.label :email %>
     <%= f.text_field :email %>
-    <%= f.hidden_field :item_id, value: @item.id %>
+    <%= f.hidden_field :item_id, value: @presenter.item_id %>
     <%= f.submit "Buy", class: "btn-buy-now" %>
   <% end %>
 </div>
