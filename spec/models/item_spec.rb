@@ -27,6 +27,11 @@ describe Item do
 
       expect(@item.email).to eq("someone@gmail.com")
     end
+
+    it "has availablity" do
+
+      expect(@item.available).to eq(true)
+    end
   end
 
   context "item is invalid" do
