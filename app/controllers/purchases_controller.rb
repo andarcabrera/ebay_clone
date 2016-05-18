@@ -7,9 +7,9 @@ class PurchasesController < ApplicationController
 
   def create
     @purchase = Purchase.new(purchase_params)
-    item = Item.find(@purchase.item_id)
+    @item = Item.find(@purchase.item_id)
     if @purchase.save
-      ItemSoldMailer.notify_seller(item, @purchase).deliver_now
+      ItemSoldMailer.notify_seller(@item, @purchase).deliver_now
       render :show
     else
       redirect_to "/items/#{@purchase.item_id}/purchases/new"
