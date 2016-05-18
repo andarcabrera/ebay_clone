@@ -1,7 +1,13 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'faker'
+
+images = Dir.entries(File.open(File.join(Rails.root, "public/sample_images/"))) - [".", ".."]
+
+10.times do
+  item =  Item.find_or_create_by(name: Faker::Lorem.word,
+                         description: Faker::Lorem.paragraph,
+                         price: Faker::Number.number(2),
+                         email: Faker::Internet.email)
+
+  item.image.store!(File.open(File.join(Rails.root, File.join("public/sample_images/", images.sample))))
+  item.save
+end
