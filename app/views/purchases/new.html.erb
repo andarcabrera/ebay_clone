@@ -1,8 +1,12 @@
-<h2> Buy Item </h2>
+<div class="container text-center page-title">
+  <h2> Buy Item </h2>
+</div>
 
-<%= form_for @purchase, url: {action: "create"} do |f| %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <%= f.hidden_field :item_id, value: @item.id %>
-  <%= f.submit "Buy" %>
-<% end %>
+<div class="container  text-center new-item-form">
+  <%= form_for @purchase, url: {action: "create"} do |f| %>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+    <%= f.hidden_field :item_id, value: @item.id %>
+    <%= f.submit "Buy", class: "btn-buy-now" %>
+  <% end %>
+</div>

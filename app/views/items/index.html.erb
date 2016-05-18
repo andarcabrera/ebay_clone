@@ -1,13 +1,24 @@
-<h1> Items for Sale </h1>
-<a class="btn btn-success" href="/items/new" role="button">Add Item</a>
-<ul>
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="text-center"> Items for Sale </h1>
+    <p class="text-center">  <a class="btn btn-success btn-add-item" href="/items/new" role="button">Add Item</a></p>
+  </div>
+</div>
+
+<div class="container">
   <% @presenter.items.each do |item| %>
-    <li>
-      <%= item.name %> : <%= item.price %> <%= image_tag(item.image, size: "100") %>
-      <a class="btn btn-primary btn-sm" href="items/<%= item.id %>/purchases/new" role="button">Buy Now!</a>
-      <br>
-      <%= item.description %>
-    </li>
+    <div class="col-xs-12 col-md-4 col-lg-3">
+      <div class="row, item-container">
+        <div class="col-md-12, item-details-container">
+          <div  class="items-index-image-container">  <%= image_tag(item.image, size: "100") %> </div>
+          <div class="title-price"> <strong> <%= item.name.capitalize %> : $<%= item.price %> </strong></div>
+          <p> <a class="btn btn-primary btn-sm btn-buy-now" href="items/<%= item.id %>/purchases/new" role="button">Buy Now!</a></p>
+          <p class="item-description">  <%= item.description %></p>
+        </div>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>
+
+
 
