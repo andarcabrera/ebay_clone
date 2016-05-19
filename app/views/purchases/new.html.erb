@@ -6,7 +6,6 @@
   <%= form_for @presenter.purchase, url: {action: "create"} do |f| %>
     <%= f.label :email %>
     <%= f.email_field :email %>
-    <%= f.hidden_field :item_id, value: @presenter.item_id %>
     <%= f.submit "Buy", class: "btn-buy-now" %>
   <% end %>
 </div>

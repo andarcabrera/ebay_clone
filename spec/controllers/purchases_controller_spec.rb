@@ -23,27 +23,27 @@ describe PurchasesController do
   context "purchase successful" do
 
     it "response successful" do
-      post :create, :purchase => {email: "someone@example.com", item_id: item.id}
+      post :create, :id => item.id, :purchase => {email: "someone@example.com", item_id: item.id}
 
       expect(response).to have_http_status(:success)
       expect(response.content_type).to eq("text/html")
     end
 
     it "renders to the purchase confirmation page" do
-      post :create, :purchase => {email: "someone@example.com", item_id: item.id}
+      post :create, :id => item.id, :purchase => {email: "someone@example.com", item_id: item.id}
 
       expect(response).to render_template(:show)
     end
 
     it "send a confirmation email to seller" do
-      expect{ post :create, :purchase => { email: "someone@example.com", item_id: item.id } }.to change{ActionMailer::Base.deliveries.count}.by(1)
+      expect{ post :create, :id => item.id, :purchase => { email: "someone@example.com", item_id: item.id } }.to change{ActionMailer::Base.deliveries.count}.by(1)
     end
   end
 
   context "purchase unsuccessful" do
 
     it "redirects to new purchase  page" do
-      post :create, :purchase => { item_id: item.id }
+      post :create, :id => item.id, :purchase => { item_id: item.id }
 
       expect(response).to have_http_status(:redirect)
       expect(response.content_type).to eq("text/html")

@@ -9,23 +9,27 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    purchase = new_purchase(purchase_params)
-    item = find_item(purchase_params[:item_id])
+    purchase = new_purchase(email: buyer_email, item_id: item_id)
+    item = find_item(item_id)
     @presenter = create_presenter(purchase, item)
 
-    if @presenter.purchase.save
+    if purchase.save
       item.update_attributes(available: false)
       send_email(@presenter)
       render :show
     else
-      redirect_to "/items/#{@presenter.item_id}/purchases/new"
+      redirect_to "/items/#{item_id}/purchases/new"
     end
   end
 
   private
 
   def purchase_params
-    params.require(:purchase).permit(:email, :item_id)
+    params.require(:purchase).permit(:email)
+  end
+
+  def buyer_email
+    purchase_params[:email]
   end
 
   def create_presenter(purchase, item)
