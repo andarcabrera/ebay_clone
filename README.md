@@ -17,21 +17,29 @@ rake db:migrate
 rake db:seed
 ```
 start redis server
-     redis-server
+```
+redis-server
+```
 
 ## Usage
 
 Start server:
 
-```rails s```
+```
+rails s
+```
 
 View project at 'http://localhost:3000'
 
 ## Tests
 From the root directory run:
 
-```rspec```
+```
+rspec
+```
 
 To see tests detail, run:
- ```rspec spec --format documentation```
+ ```
+rspec spec --format documentation
+```
 
