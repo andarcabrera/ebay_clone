@@ -17,7 +17,7 @@ rake db:migrate
 rake db:seed
 ```
 start redis server
-```redis-server```
+     redis-server
 
 ## Usage
 
