@@ -12,10 +12,4 @@ describe ItemsIndexPresenter do
 
     expect(presenter.items).to eq(items)
   end
-
-  it "returns available items" do
-
-    expect(presenter.available_items).to eq([available_item])
-    expect(presenter.available_items).to_not include(unavailable_item)
-  end
 end
