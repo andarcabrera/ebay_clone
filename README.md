@@ -5,6 +5,7 @@ Ebay clone that offers a marketplace for buying and selling items.
 - ruby ~> 2.2.1
 - bundler >= 1.3.0, < 2.0
 - postgresql
+- redis
 
 ## Installation
 Clone the repository and run:
@@ -13,6 +14,8 @@ Clone the repository and run:
 ```rake db:create```
 ```rake db:migrate```
 ```rake db:seed```
+start redis server
+```redis-server```
 
 ## Usage
 

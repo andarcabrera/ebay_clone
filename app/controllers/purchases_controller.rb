@@ -15,7 +15,7 @@ class PurchasesController < ApplicationController
 
     if purchase.save
       item.update_attributes(available: false)
-      send_email(@presenter)
+      send_email(purchase, item)
       render :show
     else
       redirect_to "/items/#{item_id}/purchases/new"
@@ -48,7 +48,7 @@ class PurchasesController < ApplicationController
     params[:id]
   end
 
-  def send_email(purchase_details)
-    ItemSoldMailer.notify_seller(purchase_details).deliver_now
+  def send_email(purchase, item)
+    ItemSoldMailer.notify_seller(purchase, item).deliver_later
   end
 end
