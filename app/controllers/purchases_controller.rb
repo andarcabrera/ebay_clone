@@ -1,25 +1,34 @@
 require 'purchase/presenters/new_purchase_presenter'
+require 'purchase/presenters/show_purchase_presenter'
 
 class PurchasesController < ApplicationController
 
   def new
-    item = find_item(item_id)
-    purchase = new_purchase(item_id: item_id)
+    item = Item.find(params[:id])
+    purchase = Purchase.new
     @presenter = create_presenter(purchase, item)
   end
 
   def create
     purchase = new_purchase(email: buyer_email, item_id: item_id)
-    item = find_item(item_id)
-    @presenter = create_presenter(purchase, item)
+    Item.transaction do
+      item = Item.lock.find(item_id)
+      @presenter = create_presenter(purchase, item)
 
-    if purchase.save
-      item.update_attributes(available: false)
-      send_email(purchase, item)
-      render :show
-    else
-      redirect_to "/items/#{item_id}/purchases/new"
+      if purchase.save
+        item.update_attributes(available: false)
+        send_email(purchase, item)
+        redirect_to action: "show", item_id: item.id, id: purchase.id
+      else
+        render :new
+      end
     end
+  end
+
+  def show
+    item = Item.find(params[:item_id])
+    purchase = Purchase.find(params[:id])
+    @presenter = ShowPurchasePresenter.new(purchase, item)
   end
 
   private
@@ -40,15 +49,12 @@ class PurchasesController < ApplicationController
     Purchase.new(purchase_params)
   end
 
-  def find_item(id)
-    Item.find(id)
-  end
-
   def item_id
     params[:id]
   end
 
   def send_email(purchase, item)
+    #SendPurchaseMail.perform_later(purchase, item)
     ItemSoldMailer.notify_seller(purchase, item).deliver_later
   end
 end
