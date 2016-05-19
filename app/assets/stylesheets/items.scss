@@ -1,20 +1,29 @@
-.jumbotron {
-  background-color: #94618E !important;
-  color: #F4DEC8 !important;
+.index-jumbotron {
+  background-color: #94618E;
+  color: #F4DEC8;
+  height: 20em;
+  margin-bottom: 3em;
+}
+
+.jumbotron-contents {
+  width: 20em;
+  margin: auto;
+  padding-top: 6em;
+  text-align: center;
 }
 
 .btn-add-item {
-  background-color: #F8EEE7 !important;
-  color: #49274A !important;
+  background-color: #F8EEE7;
+  color: #49274A;
   font-weight: bold;
-  border-color: #F4DEC8 !important;
+  border-color: #F4DEC8;
 }
 
 .btn-buy-now {
-  background-color: #49274A !important;
-  color: #F4DEC8 !important;
+  background-color: #49274A;
+  color: #F4DEC8;
   font-weight: bold;
-  border-color: #94618E !important;
+  border-color: #94618E;
 }
 
 .items-index-image-container {
