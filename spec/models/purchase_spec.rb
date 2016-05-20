@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 describe Purchase do
-
-  let (:purchase) { Purchase.create(email: "me@example.com", item_id: 2) }
-
   context "purchase is valid" do
+    let (:purchase) { Purchase.create(email: "me@example.com", item_id: 2) }
+
     it "has an email" do
 
       expect(purchase.email).to eq("me@example.com")

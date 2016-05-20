@@ -8,12 +8,13 @@ describe ItemSoldMailer do
     let(:mail) { described_class.notify_seller(purchase, item).deliver_now }
 
     it 'it has a subject' do
+
       expect(mail.subject).to eq('Item Sold')
     end
 
     it 'it is sent to the item\'s seller email' do
 
-      expect(mail.to).to eq(["seller@me.com"])
+      expect(mail.to).to eq(['seller@me.com'])
     end
 
     it 'it is sent from the ebay_clone default email' do
