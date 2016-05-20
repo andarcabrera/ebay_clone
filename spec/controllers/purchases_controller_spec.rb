@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe PurchasesController do
 
-  let (:item) { Item.create(name: "gloves", description: "they fit", price: 89, email: "you@example.com") }
+  let (:item) { Item.create(name: "gloves", description: "they fit", price: 89, user_id: "you@example.com") }
 
   context "request to buy item" do
     it "response is successful" do

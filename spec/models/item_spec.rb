@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Item do
   context "item is valid" do
-    let(:item) { Item.create(name: "socks", description: "they come in pairs", price: 10, email: "someone@gmail.com") }
+    let(:item) { Item.create(name: "socks", description: "they come in pairs", price: 10, user_id: 1) }
 
     it "has a name" do
 
@@ -19,9 +19,9 @@ describe Item do
       expect(item.price).to eq(10)
     end
 
-    it "has an email" do
+    it "has an user_id" do
 
-      expect(item.email).to eq("someone@gmail.com")
+      expect(item.user_id).to eq(1)
     end
 
     it "has availablity" do
@@ -32,26 +32,26 @@ describe Item do
 
   context "item is invalid" do
     it "doesn't save without a name" do
-      item = create_invalid_item(description: "Hi", price: 12, email: "hello")
+      item = create_invalid_item(description: "Hi", price: 12, user_id: 1)
 
       expect(item.errors).to include(:name)
     end
 
     it "doesn't save without a description" do
-      item = create_invalid_item(name: "Jerome", price: 12, email: "hello")
+      item = create_invalid_item(name: "Jerome", price: 12, user_id: 1)
 
       expect(item.errors).to include(:description)
     end
 
     it "doesn't save without a price" do
-      item = create_invalid_item(name: "Jerome", description: "hot water", email: "hello")
+      item = create_invalid_item(name: "Jerome", description: "hot water", user_id: 1)
 
       expect(item.errors).to include(:price)
     end
 
-    it "doesn't save without a email" do
+    it "doesn't save without a user_id" do
       item = create_invalid_item(name: "Jerome", description: "hot water", price: 14)
-      expect(item.errors).to include(:email)
+      expect(item.errors).to include(:user_id)
     end
   end
 
