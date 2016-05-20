@@ -12,6 +12,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'carrierwave', '~> 0.11.2'
 gem 'sidekiq', '~> 4.1.2'
 
+group :test do
+  gem 'rspec-sidekiq'
+end
 
 group :development, :test do
   gem 'byebug'
