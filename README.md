@@ -20,7 +20,10 @@ start redis server
 ```
 redis-server
 ```
-
+start sidekiq
+```
+bundle exec sidekiq
+```
 ## Usage
 
 Start server:
