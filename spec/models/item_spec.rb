@@ -1,36 +1,32 @@
 require 'rails_helper'
 
 describe Item do
-
-  before(:each) do
-    Item.create(name: "socks", description: "they come in pairs", price: 10, email: "someone@gmail.com")
-    @item = Item.first
-  end
-
   context "item is valid" do
+    let(:item) { Item.create(name: "socks", description: "they come in pairs", price: 10, email: "someone@gmail.com") }
+
     it "has a name" do
 
-      expect(@item.name).to eq("socks")
+      expect(item.name).to eq("socks")
     end
 
     it "has a description" do
 
-      expect(@item.description).to eq("they come in pairs")
+      expect(item.description).to eq("they come in pairs")
     end
 
     it "has a price" do
 
-      expect(@item.price).to eq(10)
+      expect(item.price).to eq(10)
     end
 
     it "has an email" do
 
-      expect(@item.email).to eq("someone@gmail.com")
+      expect(item.email).to eq("someone@gmail.com")
     end
 
     it "has availablity" do
 
-      expect(@item.available).to eq(true)
+      expect(item.available).to eq(true)
     end
   end
 
