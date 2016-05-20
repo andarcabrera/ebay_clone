@@ -36,7 +36,7 @@ describe PurchasesController do
     end
 
     it "send a confirmation email to seller" do
-      expect{ post :create, :id => item.id, :purchase => { email: "someone@example.com", item_id: item.id } }.to change{ActiveJob::Base.queue_adapter.enqueued_jobs.count}.by(1)
+      expect{ post :create, :id => item.id, :purchase => { email: "someone@example.com", item_id: item.id } }.to change{Sidekiq::Worker.jobs.size }.by(1)
     end
   end
 
