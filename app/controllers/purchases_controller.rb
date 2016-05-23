@@ -13,12 +13,13 @@ class PurchasesController < ApplicationController
     purchase = Purchase.new(email: buyer_email, item_id: params[:id])
     Item.transaction do
       item = Item.lock.find(params[:id])
-      @presenter = NewPurchasePresenter.new(purchase, item)
-      if purchase.save
+      if purchase.valid?
+        purchase.save
         item.update_attributes(available: false)
         send_email(purchase.id, item.id)
         redirect_to action: "show", item_id: item.id, id: purchase.id
       else
+        @presenter = NewPurchasePresenter.new(purchase, item)
         render :new
       end
     end

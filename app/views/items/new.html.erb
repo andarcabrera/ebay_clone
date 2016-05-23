@@ -19,4 +19,12 @@
     </div>
     <%= f.submit "Create", class: "btn-buy-now" %>
   <% end %>
+
+  <% if @presenter.errors %>
+    <ul>
+      <% @presenter.errors.each do |error| %>
+        <li> <%= error %> </li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>

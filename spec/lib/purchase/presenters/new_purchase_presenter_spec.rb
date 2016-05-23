@@ -3,7 +3,7 @@ require 'purchase/presenters/new_purchase_presenter'
 
 describe NewPurchasePresenter do
 
-  let (:purchase) { double "purchase", email: "areyouthere@email.com", item_id: 3 }
+  let (:purchase) { double "purchase", email: "areyouthere@email.com", item_id: 3, errors: "that's a no-no!" }
   let (:item) { double "item", name: "phone", description: "smart", price: 3, email: "hey@you.com" }
   let (:presenter) { NewPurchasePresenter.new(purchase, item) }
 
@@ -42,6 +42,10 @@ describe NewPurchasePresenter do
     expect(presenter.seller_email).to eq("hey@you.com")
   end
 
+  it "returns an error for invalid purchase" do
+
+    expect(presenter.errors).to eq("that's a no-no!")
+  end
 end
 
 

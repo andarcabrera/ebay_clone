@@ -26,4 +26,8 @@ class NewPurchasePresenter
   def seller_email
     @item.email
   end
+
+  def errors
+    @purchase.errors
+  end
 end
