@@ -14,7 +14,7 @@
         <div class="col-md-12, item-details-container">
           <div  class="items-index-image-container">  <%= image_tag(item.image, size: "100") %> </div>
           <div class="title-price"> <strong> <%= item.name.capitalize %> : $<%= item.price %> </strong></div>
-          <%= button_to "Buy Now", new_purchase_path( id: item.id ), method: :get, class: "btn btn-xs, btn-buy-now" %>
+          <%= button_to "Buy Now", new_purchase_path( item_id: item.id ), method: :get, class: "btn btn-xs, btn-buy-now" %>
           <p class="item-description">  <%= item.description %></p>
         </div>
       </div>

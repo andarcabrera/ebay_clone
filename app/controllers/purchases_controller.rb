@@ -4,15 +4,15 @@ require 'purchase/presenters/show_purchase_presenter'
 class PurchasesController < ApplicationController
 
   def new
-    item = Item.find(params[:id])
+    item = Item.find(params[:item_id])
     purchase = Purchase.new
     @presenter = NewPurchasePresenter.new(purchase, item)
   end
 
   def create
-    purchase = Purchase.new(email: buyer_email, item_id: params[:id])
+    purchase = Purchase.new(email: buyer_email, item_id: params[:item_id])
     Item.transaction do
-      item = Item.lock.find(params[:id])
+      item = Item.lock.find(params[:item_id])
       if purchase.valid?
         purchase.save
         item.update_attributes(available: false)
