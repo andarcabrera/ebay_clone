@@ -28,6 +28,6 @@ class NewPurchasePresenter
   end
 
   def errors
-    @purchase.errors
+    @purchase.errors.full_messages
   end
 end

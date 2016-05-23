@@ -3,7 +3,7 @@ require 'purchase/presenters/new_purchase_presenter'
 
 describe NewPurchasePresenter do
 
-  let (:purchase) { double "purchase", email: "areyouthere@email.com", item_id: 3, errors: "that's a no-no!" }
+  let (:purchase) { double "purchase", email: "areyouthere@email.com", item_id: 3 }
   let (:item) { double "item", name: "phone", description: "smart", price: 3, email: "hey@you.com" }
   let (:presenter) { NewPurchasePresenter.new(purchase, item) }
 
@@ -43,8 +43,8 @@ describe NewPurchasePresenter do
   end
 
   it "returns an error for invalid purchase" do
-
-    expect(presenter.errors).to eq("that's a no-no!")
+    allow(purchase).to receive_message_chain(:errors, :full_messages) { "That's a no-no!" }
+    expect(presenter.errors).to eq("That's a no-no!")
   end
 end
 

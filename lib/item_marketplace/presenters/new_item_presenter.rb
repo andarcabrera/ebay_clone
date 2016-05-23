@@ -7,6 +7,6 @@ class NewItemPresenter
   end
 
   def errors
-    @item.errors
+    @item.errors.full_messages
   end
 end
