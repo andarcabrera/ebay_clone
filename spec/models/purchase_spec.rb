@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Purchase do
-  let (:item) { Item.create(name: "gloves", description: "they fit", price: 89, email: "you@example.com") }
+  let (:item) { Item.create(name: "gloves", description: "they fit", price: 89, user_id: 1) }
   context "purchase is valid" do
     let (:purchase) { Purchase.create(email: "me@example.com", item_id: item.id) }
 
@@ -30,7 +30,7 @@ describe Purchase do
     end
 
     it "doesn't save if the item has already been purchased" do
-      unavailable_item =  Item.create(name: "gloves", description: "they fit", price: 89, email: "you@example.com", available: false)
+      unavailable_item =  Item.create(name: "gloves", description: "they fit", price: 89, user_id: 1, available: false)
       invalid_purchase = Purchase.create(email: "me@example.com", item_id: unavailable_item.id)
 
       expect(invalid_purchase.errors).to include(:available_item)
