@@ -1,16 +1,30 @@
-<h2> Add Item </h2>
+<div class="container text-center page-title">
+  <h2> Add Item </h2>
+</div>
 
-<%= form_for @presenter.item, url: {action: "create"} do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :description %>
-  <%= f.text_area :description %>
-  <%= f.label :price %>
-  <%= f.text_field :price %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <%= f.label :image %>
-  <%= f.file_field :image %>
-  <%= f.hidden_field :image_cache %>
-  <%= f.submit "Create" %>
-<% end %>
+<div class="container  text-center new-item-form">
+  <%= form_for @presenter.item, url: {action: "create"} do |f| %>
+    <%= f.label :name %><br>
+    <%= f.text_field :name, size: 60 %><br><br>
+    <%= f.label :description %><br>
+    <%= f.text_area :description, :cols => 60, :rows => 10 %><br><br>
+    <%= f.label :price %><br>
+    <%= f.text_field :price, size: 60 %><br><br>
+    <%= f.label :email %><br>
+    <%= f.email_field :email, size: 60 %><br><br>
+    <div class="file-field-wrapper">
+      <%= f.label :image %>
+      <%= f.file_field :image %><br>
+      <%= f.hidden_field :image_cache %><br>
+    </div>
+    <%= f.submit "Create", class: "btn-buy-now" %>
+  <% end %>
+
+  <% if @presenter.errors %>
+    <ul>
+      <% @presenter.errors.each do |error| %>
+        <li> <%= error %> </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

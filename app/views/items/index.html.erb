@@ -1,13 +1,23 @@
-<h1> Items for Sale </h1>
-<a class="btn btn-success" href="/items/new" role="button">Add Item</a>
-<ul>
-  <% @presenter.items.each do |item| %>
-    <li>
-      <%= item.name %> : <%= item.price %> <%= image_tag(item.image, size: "100") %>
-      <button type="button" class="btn btn-primary btn-sm">Buy Now!</button>
-      <br>
-      <%= item.description %>
-    </li>
-  <% end %>
-</ul>
+<div class="container">
+  <div class="jumbotron, index-jumbotron">
+    <div class="jumbotron-contents">
+      <h1 class="text-center, text-in-jumbotron"> Items for Sale </h1>
+      <%= button_to "Add Item", items_new_path, method: :get, class: "btn btn-success, btn-add-item" %>
+    </div>
+  </div>
+</div>
 
+<div class="container">
+  <% @presenter.items.each do |item| %>
+    <div class="col-xs-12 col-md-4 col-lg-3">
+      <div class="row, item-container">
+        <div class="col-md-12, item-details-container">
+          <div  class="items-index-image-container">  <%= image_tag(item.image, size: "100") %> </div>
+          <div class="title-price"> <strong> <%= item.name.capitalize %> : $<%= item.price %> </strong></div>
+          <%= button_to "Buy Now", new_purchase_path( item_id: item.id ), method: :get, class: "btn btn-xs, btn-buy-now" %>
+          <p class="item-description">  <%= item.description %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
