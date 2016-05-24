@@ -29,12 +29,6 @@ describe User do
 
       expect(user.errors).to include(:email)
     end
-
-    it "doesn't save without an password" do
-      user = User.create(username: "Chris", email: "niceshoes@example.com")
-
-      expect(user.errors).to include(:password)
-    end
   end
 
   context "email is not unique" do
