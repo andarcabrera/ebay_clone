@@ -1,0 +1,25 @@
+<div class="container text-center page-title">
+  <h2> Sign up for Ebay Clone </h2>
+</div>
+
+<div class="container  text-center new-item-form">
+  <%= form_for @presenter.user, url: {action: "create"} do |f| %>
+    <%= f.label :username %><br>
+    <%= f.text_field :username, size: 60 %><br><br>
+    <%= f.label :email %><br>
+    <%= f.email_field :email, size: 60 %><br><br>
+    <%= f.label :password %><br>
+    <%= f.password_field :password, size: 60 %><br><br>
+    <%= f.submit "Sign Up", class: "btn-buy-now" %>
+  <% end %>
+</div>
+
+<div>
+  <% if @presenter.errors %>
+    <ul>
+      <% @presenter.errors.each do |error| %>
+        <li> <%= error %> </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
