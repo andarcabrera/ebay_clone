@@ -14,6 +14,7 @@ gem 'sidekiq', '~> 4.1.2'
 gem 'faker'
 gem 'rails_12factor', group: :production
 gem 'redis'
+gem 'bcrypt'
 
 group :test do
   gem 'rspec-sidekiq'
