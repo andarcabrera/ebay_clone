@@ -27,7 +27,7 @@ describe UsersController do
     it "redirects to the item index page" do
       post :create, :user => {username: "pamplemousse", email: "lacroix@example.com", password: "chosenone" }
 
-      expect(response).to redirect_to(:root)
+      expect(response).to redirect_to items_path
     end
 
     it "adds a user to the database"  do
