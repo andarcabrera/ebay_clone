@@ -1,11 +1,12 @@
 require 'faker'
-
+require 'bcrypt'
+include BCrypt
 images = Dir.entries(File.open(File.join(Rails.root, "public/sample_images/"))) - [".", ".."]
 
 10.times do
   user = User.find_or_create_by(username: Faker::Lorem.word,
                                 email: Faker::Internet.email,
-                                password: Faker::Lorem.word)
+                                password_hash: Password.create("1234password"))
 
   item = user.items.find_or_create_by(name: Faker::Lorem.word,
                          description: Faker::Lorem.paragraph,
