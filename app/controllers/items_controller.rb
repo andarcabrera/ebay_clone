@@ -11,9 +11,9 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @presenter = NewItemPresenter.new(Item.new(item_params))
+    @presenter = NewItemPresenter.new(current_user.listings.new(item_params))
     if @presenter.item.save
-      redirect_to :root
+      redirect_to items_path
     else
       render :new
     end
@@ -22,6 +22,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :price, :user_id, :image)
+    params.require(:item).permit(:name, :description, :price, :image)
   end
 end
