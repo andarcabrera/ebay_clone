@@ -1,11 +1,13 @@
 require 'rails_helper'
 require 'purchase/presenters/show_purchase_presenter'
 
-describe NewPurchasePresenter do
+describe ShowPurchasePresenter do
 
-  let (:purchase) { double "purchase", email: "areyouthere@email.com", item_id: 3 }
-  let (:item) { double "item", name: "phone", description: "smart", price: 3, email: "hey@you.com" }
-  let (:presenter) { NewPurchasePresenter.new(purchase, item) }
+  let (:seller) { double "seller", id: 3, email: "hey@you.com" }
+  let (:purchaser) { double "purchaser", id: 3, email: "areyouthere@email.com" }
+  let (:purchase) { double "purchase", id: 3, purchaser: purchaser, purchaser_id: purchaser.id, item_id: item.id }
+  let (:item) { double "item", id: 3, seller: seller, name: "phone", description: "smart", price: 3, seller_id: seller.id }
+  let (:presenter) { ShowPurchasePresenter.new(purchase, item) }
 
   it "returns the purchase it's given" do
 
@@ -19,7 +21,7 @@ describe NewPurchasePresenter do
 
   it "returns the buyer's email" do
 
-    expect(presenter.buyer_email).to eq("areyouthere@email.com")
+    expect(presenter.purchaser_email).to eq("areyouthere@email.com")
   end
 
   it "returns the item name" do
