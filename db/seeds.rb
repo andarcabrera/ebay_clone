@@ -8,7 +8,7 @@ images = Dir.entries(File.open(File.join(Rails.root, "public/sample_images/"))) 
                                 email: Faker::Internet.email,
                                 password_hash: Password.create("1234password"))
 
-  item = user.items.find_or_create_by(name: Faker::Lorem.word,
+  item = user.listings.find_or_create_by(name: Faker::Lorem.word,
                          description: Faker::Lorem.paragraph,
                          price: Faker::Number.number(2))
 
