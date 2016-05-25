@@ -1,13 +1,16 @@
 require 'rails_helper'
 
 describe Purchase do
-  let (:item) { Item.create(name: "gloves", description: "they fit", price: 89, user_id: 1) }
+  let(:seller) { User.create(username: "Mr. Cheetos", email: "cheesy@cheese.com", password: "itainteastbeingcheesy") }
+  let(:purchaser) { User.create(username: "Mr. Healthy", email: "salad@alot.com", password: "ilikecheese") }
+  let (:item) { Item.create(name: "gloves", description: "they fit", price: 89, seller_id: seller.id) }
+
   context "purchase is valid" do
-    let (:purchase) { Purchase.create(email: "me@example.com", item_id: item.id) }
+    let (:purchase) { Purchase.create(purchaser_id: purchaser.id, item_id: item.id) }
 
-    it "has an email" do
+    it "has a purchaser id" do
 
-      expect(purchase.email).to eq("me@example.com")
+      expect(purchase.purchaser_id).to eq(purchaser.id)
     end
 
     it "has an item_id" do
@@ -17,21 +20,21 @@ describe Purchase do
   end
 
   context "item is invalid" do
-    it "doesn't save without an email" do
+    it "doesn't save without a purchaser id" do
       invalid_purchase = Purchase.create(item_id: item.id)
 
-      expect(invalid_purchase.errors).to include(:email)
+      expect(invalid_purchase.errors).to include(:purchaser_id)
     end
 
     it "doesn't save without an item id" do
-      invalid_purchase = Purchase.create(email: "us@example.com")
+      invalid_purchase = Purchase.create(purchaser_id: purchaser.id)
 
       expect(invalid_purchase.errors).to include(:item_id)
     end
 
     it "doesn't save if the item has already been purchased" do
-      unavailable_item =  Item.create(name: "gloves", description: "they fit", price: 89, user_id: 1, available: false)
-      invalid_purchase = Purchase.create(email: "me@example.com", item_id: unavailable_item.id)
+      unavailable_item =  Item.create(name: "gloves", description: "they fit", price: 89, seller_id: 1, available: false)
+      invalid_purchase = Purchase.create(purchaser_id: purchaser.id, item_id: unavailable_item.id)
 
       expect(invalid_purchase.errors).to include(:available_item)
     end
