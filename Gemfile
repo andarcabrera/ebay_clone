@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'carrierwave', '~> 0.11.2'
 gem 'sidekiq', '~> 4.1.2'
+gem 'faker'
 
 group :test do
   gem 'rspec-sidekiq'
