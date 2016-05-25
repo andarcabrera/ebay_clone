@@ -1,6 +1,7 @@
 class Purchase < ActiveRecord::Base
   validates:item_id, :purchaser_id, presence: true
   validate :available_item
+
   belongs_to :purchaser, class_name: "User", foreign_key: :purchaser_id
   belongs_to :item
   has_one :seller, through: :item, source: :seller
