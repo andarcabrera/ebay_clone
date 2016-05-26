@@ -19,3 +19,4 @@ production:
   database: ebay_clone_production
   username: ebay_clone
   password: <%= ENV['EBAY_CLONE_DATABASE_PASSWORD'] %>
+  pool: 7
