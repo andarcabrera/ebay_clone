@@ -3,7 +3,6 @@ require 'rails_helper'
 describe ItemsController do
 
   context "request for home page" do
-
     it "response is successful" do
       get :index
 
@@ -35,8 +34,8 @@ describe ItemsController do
 
   context "new item is created successfully" do
     before(:each) do
-     user =  User.create(username: "dreamteam", email: "us@dream.com", password_hash: "zzzzzzz")
-     session[:user_id] = user.id
+      user =  User.create(username: "dreamteam", email: "us@dream.com", password_hash: "zzzzzzz")
+      session[:user_id] = user.id
     end
 
     it "response is successful" do
@@ -62,8 +61,8 @@ describe ItemsController do
 
   context "new item is invalid and not created" do
     before(:each) do
-     user =  User.create(username: "dreamteam", email: "us@dream.com", password_hash: "zzzzzzz")
-     session[:user_id] = user.id
+      user =  User.create(username: "dreamteam", email: "us@dream.com", password_hash: "zzzzzzz")
+      session[:user_id] = user.id
     end
 
     it "response is successful" do
@@ -86,4 +85,3 @@ describe ItemsController do
     end
   end
 end
-

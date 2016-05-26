@@ -1,4 +1,5 @@
 describe User do
+
   context "valid user" do
     let(:user) { User.new(username: "Jeff", email: "rogerthat@example.com", password: "intriguing") }
     it "has a username" do
@@ -50,4 +51,3 @@ describe User do
     end
   end
 end
-

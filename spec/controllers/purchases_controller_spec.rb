@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe PurchasesController do
 
-  let (:seller) { User.create(username: "bagel", email: "bringitback", password: "plaincreamcheese") }
+  let (:seller) { User.create(username: "bagel", email: "bring@itback.com", password: "plaincreamcheese") }
   let (:item) { Item.create(name: "gloves", description: "they fit", price: 89, seller_id: seller.id) }
   let (:purchaser) { User.create(username: "oatmeal", email: "brownsugar@melt.com", password: "noquinoa") }
 
@@ -43,6 +43,7 @@ describe PurchasesController do
       expect(response).to have_http_status(:success)
       expect(response.content_type).to eq("text/html")
       expect(response).to render_template("sessions/new")
+      expect(flash[:notice]).to eq("You need to be logged in to purchase this item")
     end
   end
 

@@ -19,7 +19,7 @@ describe Purchase do
     end
   end
 
-  context "item is invalid" do
+  context "purchase is invalid" do
     it "doesn't save without a purchaser id" do
       invalid_purchase = Purchase.create(item_id: item.id)
 

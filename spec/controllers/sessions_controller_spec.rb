@@ -1,4 +1,5 @@
 describe SessionsController do
+
   context "request for login page" do
     it "has a successful response" do
       get :new
