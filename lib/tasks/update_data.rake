@@ -5,7 +5,7 @@ task update_data: :environment do
   ActiveRecord::Base.transaction do
     items.each do |item|
       email = item.email
-      seller = User.find_or_create_by(username: email, email: email, password: email)
+      seller = User.find_or_create_by(username: email, email: email, password_hash: email)
       item.seller_id = seller.id
       item.save
     end
@@ -17,7 +17,7 @@ task update_data: :environment do
   ActiveRecord::Base.transaction do
     purchases.each do |purchase|
       email = purchase.email
-      purchaser = find_or_create_by(username: email, email: email, password: email)
+      purchaser = find_or_create_by(username: email, email: email, password_hash: email)
       purchase.purchaser_id = purchaser.id
       purchase.save
     end
