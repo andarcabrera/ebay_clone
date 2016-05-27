@@ -3,13 +3,8 @@ require 'item_marketplace/presenters/new_item_presenter'
 
 class ItemsController < ApplicationController
 
-  before_action :check_current_user, only: [:new, :create]
-
-  def check_current_user
-    if !current_user
-      flash[:notice] = "You need to be logged in to add an item"
-      render :new
-    end
+  before_action only: [:new, :create] do
+    check_current_user("You need to be logged in to add an item")
   end
 
   def index

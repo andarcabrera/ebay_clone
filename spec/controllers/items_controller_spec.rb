@@ -93,7 +93,7 @@ describe ItemsController do
     it "renders new template" do
       post :create, :item => {name: "", description: "A", price: 1, user_id: User.last.id}
 
-      expect(response).to render_template(:new)
+      expect(response).to render_template("sessions/new")
     end
 
     it "flashes a notice" do

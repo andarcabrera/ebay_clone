@@ -37,8 +37,8 @@ describe PurchasesController do
   end
 
   context "purchase invalid because purchaser is not logged in" do
-    it "renders purchase form page" do
-      post :create, :item_id => item.id, :purchase => { item_id: item.id }
+    it "renders login page" do
+      post :create, :item_id => item.id, :purchase => { item_id: item.id, purchaser_id: purchaser.id}
 
       expect(response).to have_http_status(:success)
       expect(response.content_type).to eq("text/html")
