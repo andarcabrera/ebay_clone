@@ -84,4 +84,22 @@ describe ItemsController do
       expect(Item.count).to eq(0)
     end
   end
+
+  context "no current_user" do
+    before(:each) do
+      user =  User.create(username: "dreamteam", email: "us@dream.com", password_hash: "zzzzzzz")
+    end
+
+    it "renders new template" do
+      post :create, :item => {name: "", description: "A", price: 1, user_id: User.last.id}
+
+      expect(response).to render_template(:new)
+    end
+
+    it "flashes a notice" do
+      post :create, :item => {name: "", description: "A", price: 1, user_id: User.last.id}
+
+      expect(flash[:notice]).to eq("You need to be logged in to add an item")
+    end
+  end
 end

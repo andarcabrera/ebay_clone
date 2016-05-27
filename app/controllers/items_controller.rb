@@ -2,6 +2,16 @@ require 'item_marketplace/presenters/items_index_presenter'
 require 'item_marketplace/presenters/new_item_presenter'
 
 class ItemsController < ApplicationController
+
+  before_action :check_current_user, only: [:new, :create]
+
+  def check_current_user
+    if !current_user
+      flash[:notice] = "You need to be logged in to add an item"
+      render :new
+    end
+  end
+
   def index
     @presenter = ItemsIndexPresenter.new(Item.available.limit(100))
   end
