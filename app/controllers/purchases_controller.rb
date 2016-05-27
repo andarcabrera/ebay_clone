@@ -3,14 +3,12 @@ require 'purchase/presenters/show_purchase_presenter'
 
 class PurchasesController < ApplicationController
 
-  def new
-    item = Item.find(params[:item_id])
-    purchase = Purchase.new
-    @presenter = NewPurchasePresenter.new(purchase, item)
+  before_action do
+    check_current_user("You need to be logged in to purchase this item")
   end
 
   def create
-    purchase = Purchase.new(email: buyer_email, item_id: params[:item_id])
+    purchase = Purchase.new(purchaser_id: current_user.id, item_id: params[:item_id])
     Item.transaction do
       item = Item.lock.find(params[:item_id])
       if purchase.valid?
@@ -20,7 +18,7 @@ class PurchasesController < ApplicationController
         redirect_to action: "show", item_id: item.id, id: purchase.id
       else
         @presenter = NewPurchasePresenter.new(purchase, item)
-        render :new
+        render "items/index", status: :unprocessable_entity
       end
     end
   end

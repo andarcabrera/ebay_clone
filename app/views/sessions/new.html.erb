@@ -1,0 +1,18 @@
+<div class="container text-center page-title">
+  <h2> Sign in to your Ebay Clone account </h2>
+</div>
+
+<div class="container  text-center new-item-form">
+  <%= form_for(:session, url: login_path) do |f| %>
+    <%= f.label :email %><br>
+    <%= f.email_field :email, size: 60 %><br><br>
+    <%= f.label :password %><br>
+    <%= f.password_field :password, size: 60 %><br><br>
+    <%= f.submit "Sign In", class: "btn-buy-now" %>
+  <% end %>
+  <%= flash[:notice] %>
+  <br>
+
+  <p> Don't have an account yet? <%= link_to("Register", users_new_path) %></p>
+</div>
+

@@ -2,7 +2,11 @@
   <div class="jumbotron, index-jumbotron">
     <div class="jumbotron-contents">
       <h1 class="text-center, text-in-jumbotron"> Items for Sale </h1>
-      <%= button_to "Add Item", items_new_path, method: :get, class: "btn btn-success, btn-add-item" %>
+      <% if current_user %>
+        <%= button_to "Add Item", items_new_path, method: :get, class: "btn btn-success, btn-add-item" %>
+      <% else %>
+        <p> Log in to add an item </p>
+      <% end %>
     </div>
   </div>
 </div>
@@ -14,7 +18,7 @@
         <div class="col-md-12, item-details-container">
           <div  class="items-index-image-container">  <%= image_tag(asset_path(item.image), size: "100") %> </div>
           <div class="title-price"> <strong> <%= item.name.capitalize %> : $<%= item.price %> </strong></div>
-          <%= button_to "Buy Now", new_purchase_path( item_id: item.id ), method: :get, class: "btn btn-xs, btn-buy-now" %>
+          <%= button_to "Buy Now", create_purchase_path( item_id: item.id ), class: "btn btn-xs btn-buy-now" %>
           <p class="item-description">  <%= item.description %></p>
         </div>
       </div>
