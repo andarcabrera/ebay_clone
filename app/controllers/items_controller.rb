@@ -16,7 +16,9 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @presenter = NewItemPresenter.new(current_user.listings.new(item_params))
+    item = Item.new(item_params)
+    item.seller_id = current_user.id
+    @presenter = NewItemPresenter.new(item)
     if @presenter.item.save
       redirect_to items_path
     else
