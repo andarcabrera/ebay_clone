@@ -18,7 +18,7 @@ class PurchasesController < ApplicationController
         redirect_to action: "show", item_id: item.id, id: purchase.id
       else
         @presenter = NewPurchasePresenter.new(purchase, item)
-        render "sessions/new"
+        render "items/index", status: :unprocessable_entity
       end
     end
   end

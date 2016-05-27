@@ -51,7 +51,7 @@ describe SessionsController do
       User.create(username: "chosen", email: "thechosenone@example.com", password: "guitarman")
     end
 
-    it "has a successful response" do
+    it "has a sunprocessable_entitiy response" do
       post :create, session: { email: "thechosenone@example.com", password: "ukaleileman" }
 
       expect(response).to have_http_status(:unprocessable_entity)

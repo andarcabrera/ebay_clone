@@ -43,7 +43,7 @@ describe ItemsController do
       session[:user_id] = user.id
     end
 
-    it "response is successful" do
+    it "response redirect" do
       post :create, :item => {name: "a", description: "A", price: 1, user_id: User.last.id}
 
       expect(response).to have_http_status(:redirect)
@@ -70,7 +70,7 @@ describe ItemsController do
       session[:user_id] = user.id
     end
 
-    it "response is successful" do
+    it "response is unprocessable_entity" do
       post :create, :item => {name: "", description: "some description", price: 1, user_id: User.last.id}
 
       expect(response).to have_http_status(:unprocessable_entity)

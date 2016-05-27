@@ -60,13 +60,13 @@ describe PurchasesController do
       expect(Purchase.all.count).to eq(purchase_count)
     end
 
-    it "renders the new purchase form" do
+    it "returns the user to items index" do
       post :create, :item_id => item.id, :purchase => {purchaser_id: purchaser.id, item_id: item.id}
       post :create, :item_id => item.id, :purchase => {purchaser_id: purchaser.id, item_id: item.id}
 
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response.content_type).to eq("text/html")
-      expect(response).to render_template(:new)
+      expect(response).to render_template("items/index")
     end
   end
 end

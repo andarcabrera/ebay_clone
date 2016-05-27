@@ -39,7 +39,7 @@ describe UsersController do
   end
 
   context "new user is not created" do
-    it "response is successful" do
+    it "response is unprocessable_entity" do
       post :create, :user => {email: "lacroix@example.com", password: "chosenone" }
 
       expect(response).to have_http_status(:unprocessable_entity)
