@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       user.save
       redirect_to items_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

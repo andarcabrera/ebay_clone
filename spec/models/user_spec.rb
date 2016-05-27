@@ -4,7 +4,7 @@ describe User do
 
 >>>>>>> 11454f937d75a23f00ead8c05fa2ad8dcf70429c
   context "valid user" do
-    let(:user) { User.new(username: "Jeff", email: "rogerthat@example.com", password: "intriguing") }
+    let(:user) { User.create(username: "Jeff", email: "rogerthat@example.com", password: "intriguing") }
     it "has a username" do
 
       expect(user.username).to eq("Jeff")
@@ -19,6 +19,10 @@ describe User do
 
       expect(user.password).to eq("intriguing")
     end
+
+    it "validates  the user" do
+      expect(User.authenticate(email: user.email, password: "intriguing")).to eq(user)
+    end
   end
 
   context "invalid user" do
@@ -32,6 +36,10 @@ describe User do
       user = User.create(username: "craftsman", password: "domeavfavorrealquick")
 
       expect(user.errors).to include(:email)
+    end
+
+    it "validates  the user" do
+      expect(User.authenticate(email: "rogerthat@example.com", password: "intriguing")).to eq(nil)
     end
   end
 

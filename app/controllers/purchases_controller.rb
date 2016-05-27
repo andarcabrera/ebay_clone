@@ -3,13 +3,8 @@ require 'purchase/presenters/show_purchase_presenter'
 
 class PurchasesController < ApplicationController
 
-  before_action :check_current_user
-
-  def check_current_user
-    if !current_user
-      flash[:notice] = "You need to be logged in to purchase this item"
-      render "sessions/new"
-    end
+  before_action do
+    check_current_user("You need to be logged in to purchase this item")
   end
 
   def create
@@ -23,7 +18,7 @@ class PurchasesController < ApplicationController
         redirect_to action: "show", item_id: item.id, id: purchase.id
       else
         @presenter = NewPurchasePresenter.new(purchase, item)
-        render "sessions/new"
+        render "items/index", status: :unprocessable_entity
       end
     end
   end

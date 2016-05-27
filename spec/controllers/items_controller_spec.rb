@@ -18,6 +18,11 @@ describe ItemsController do
   end
 
   context "request for new item" do
+    before(:each) do
+      user =  User.create(username: "dreamteam", email: "us@dream.com", password_hash: "zzzzzzz")
+      session[:user_id] = user.id
+    end
+
     it "response is successful" do
       get :new
 
@@ -38,7 +43,7 @@ describe ItemsController do
       session[:user_id] = user.id
     end
 
-    it "response is successful" do
+    it "response redirect" do
       post :create, :item => {name: "a", description: "A", price: 1, user_id: User.last.id}
 
       expect(response).to have_http_status(:redirect)
@@ -65,10 +70,10 @@ describe ItemsController do
       session[:user_id] = user.id
     end
 
-    it "response is successful" do
+    it "response is unprocessable_entity" do
       post :create, :item => {name: "", description: "some description", price: 1, user_id: User.last.id}
 
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response.content_type).to eq("text/html")
     end
 
@@ -82,6 +87,25 @@ describe ItemsController do
       post :create, :item => {name: "", description: "A", price: 1, user_id: User.last.id}
 
       expect(Item.count).to eq(0)
+    end
+  end
+
+  context "no current_user" do
+    before(:each) do
+      user =  User.create(username: "dreamteam", email: "us@dream.com", password_hash: "zzzzzzz")
+    end
+
+    it "renders new template" do
+      post :create, :item => {name: "", description: "A", price: 1, user_id: User.last.id}
+
+      expect(response).to have_http_status(:unauthorized)
+      expect(response).to render_template("sessions/new")
+    end
+
+    it "flashes a notice" do
+      post :create, :item => {name: "", description: "A", price: 1, user_id: User.last.id}
+
+      expect(flash[:notice]).to eq("You need to be logged in to add an item")
     end
   end
 end

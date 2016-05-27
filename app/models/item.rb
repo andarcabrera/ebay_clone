@@ -4,7 +4,6 @@ class Item < ActiveRecord::Base
   scope :available, -> { where(available: true) }
 
   belongs_to :seller, class_name: "User", foreign_key: :seller_id
-  has_one :purchase
   has_one :purchaser, through: :purchases, source: :purchaser
 
   mount_uploader :image, ImageUploader
