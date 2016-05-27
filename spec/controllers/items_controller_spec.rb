@@ -95,8 +95,8 @@ describe ItemsController do
     it "renders new template" do
       post :create, :item => {name: "", description: "A", price: 1, user_id: user.id}
 
-      expect(response).to have_http_status(:unauthorized)
-      expect(response).to render_template("sessions/new")
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(login_path)
     end
 
     it "flashes a notice" do

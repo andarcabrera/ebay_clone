@@ -16,19 +16,23 @@ describe User do
 
       expect(user.password).to eq("intriguing")
     end
-
-    it "validates  the user" do
-      expect(User.authenticate(email: user.email, password: "intriguing")).to eq(user)
-    end
   end
 
-  context "invalid user" do
-    it "doesn't save without a username" do
+  context "user authenticated" do
+    let(:user) { User.create(username: "Jeff", email: "rogerthat@example.com", password: "intriguing") }
+
+    it "returns the user for authentication with valid credentials" do
+      expect(User.authenticate(email: user.email, password: "intriguing")).to eq(user)
+    end
+
+    it "returns nil for authentication with invalid credentials" do
       user = User.create(email: "sassyapprentice@example.com", password: "domeavfavorrealquick")
 
       expect(user.errors).to include(:username)
     end
+  end
 
+  context "invalid user" do
     it "doesn't save without an email" do
       user = User.create(username: "craftsman", password: "domeavfavorrealquick")
 

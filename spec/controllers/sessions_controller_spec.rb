@@ -16,8 +16,9 @@ describe SessionsController do
   end
 
   context "login successful" do
+    let(:user) { User.new(username: "chosen", email: "thechosenone@example.com", password: "guitarman") }
     before(:each) do
-      User.create(username: "chosen", email: "thechosenone@example.com", password: "guitarman")
+      user.save
     end
 
     it "has a successful response" do
@@ -36,7 +37,7 @@ describe SessionsController do
     it "creates a session for the user" do
       post :create, session: { email: "thechosenone@example.com", password: "guitarman" }
 
-      expect(session[:user_id]).to eq(User.last.id)
+      expect(session[:user_id]).to eq(user.id)
     end
 
     it "does not show a flash message" do
@@ -47,8 +48,9 @@ describe SessionsController do
   end
 
   context "login is unsuccessful due to incorrect credentials" do
+    let(:user) { User.new(username: "chosen", email: "thechosenone@example.com", password: "guitarman")}
     before(:each) do
-      User.create(username: "chosen", email: "thechosenone@example.com", password: "guitarman")
+      user.save
     end
 
     it "has a sunprocessable_entitiy response" do
@@ -123,8 +125,9 @@ describe SessionsController do
     end
 
     context "user successfully logs out" do
+        let(:user) { User.new(username: "chosen", email: "thechosenone@example.com", password: "guitarman") }
       before(:each) do
-        User.create(username: "chosen", email: "thechosenone@example.com", password: "guitarman")
+        user.save
       end
 
       it "redirects to the items index" do

@@ -8,7 +8,7 @@ describe PurchasesController do
 
   context "purchase successful" do
     before(:each) do
-      session[:user_id] = purchaser.id
+      login_user(purchaser)
     end
 
     it "response successful" do
@@ -40,16 +40,16 @@ describe PurchasesController do
     it "renders login page" do
       post :create, :item_id => item.id, :purchase => { item_id: item.id, purchaser_id: purchaser.id}
 
-      expect(response).to have_http_status(:unauthorized)
+      expect(response).to have_http_status(:redirect)
       expect(response.content_type).to eq("text/html")
-      expect(response).to render_template("sessions/new")
+      expect(response).to redirect_to(login_path)
       expect(flash[:notice]).to eq("You need to be logged in to purchase this item")
     end
   end
 
   context "purchase invalid because item is not available" do
     before(:each) do
-      session[:user_id] = purchaser.id
+      login_user(purchaser)
     end
 
     it "does not increase the purchase count if an item is unavaiable" do
@@ -68,5 +68,11 @@ describe PurchasesController do
       expect(response.content_type).to eq("text/html")
       expect(response).to render_template("items/index")
     end
+  end
+
+  private
+
+  def login_user(user)
+    session[:user_id] = user.id
   end
 end

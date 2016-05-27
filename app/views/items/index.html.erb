@@ -3,7 +3,7 @@
     <div class="jumbotron-contents">
       <h1 class="text-center, text-in-jumbotron"> Items for Sale </h1>
       <% if current_user %>
-        <%= button_to "Add Item", items_new_path, method: :get, class: "btn btn-success  btn-add-item" %>
+        <%= button_to "Add Item", items_new_path, method: :get, class: "btn btn-success, btn-add-item" %>
       <% else %>
         <p> Log in to add an item </p>
       <% end %>
