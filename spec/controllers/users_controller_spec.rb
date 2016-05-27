@@ -42,7 +42,7 @@ describe UsersController do
     it "response is successful" do
       post :create, :user => {email: "lacroix@example.com", password: "chosenone" }
 
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response.content_type).to eq("text/html")
     end
 

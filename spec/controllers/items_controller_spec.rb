@@ -18,6 +18,11 @@ describe ItemsController do
   end
 
   context "request for new item" do
+    before(:each) do
+      user =  User.create(username: "dreamteam", email: "us@dream.com", password_hash: "zzzzzzz")
+      session[:user_id] = user.id
+    end
+
     it "response is successful" do
       get :new
 
@@ -68,7 +73,7 @@ describe ItemsController do
     it "response is successful" do
       post :create, :item => {name: "", description: "some description", price: 1, user_id: User.last.id}
 
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response.content_type).to eq("text/html")
     end
 
@@ -93,6 +98,7 @@ describe ItemsController do
     it "renders new template" do
       post :create, :item => {name: "", description: "A", price: 1, user_id: User.last.id}
 
+      expect(response).to have_http_status(:unauthorized)
       expect(response).to render_template("sessions/new")
     end
 

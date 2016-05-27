@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   def check_current_user(message)
     if !current_user
       flash[:notice] = message
-      render "sessions/new"
+      render "sessions/new", status: :unauthorized
     end
   end
 

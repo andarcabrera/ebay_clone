@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
     if @presenter.item.save
       redirect_to items_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
