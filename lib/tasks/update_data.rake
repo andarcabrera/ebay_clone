@@ -17,7 +17,7 @@ task update_data: :environment do
   ActiveRecord::Base.transaction do
     Purchase.find_each do |purchase|
       email = purchase.email
-      purchaser = find_or_create_by(username: email, email: email, password_hash: email)
+      purchaser = Purchase.find_or_create_by(username: email, email: email, password_hash: email)
       purchase.purchaser_id = purchaser.id
       purchase.save
     end
