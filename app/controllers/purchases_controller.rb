@@ -3,6 +3,15 @@ require 'purchase/presenters/show_purchase_presenter'
 
 class PurchasesController < ApplicationController
 
+  before_action :check_current_user
+
+  def check_current_user
+    if !current_user
+      flash[:notice] = "You need to be logged in to purchase this item"
+      render "sessions/new"
+    end
+  end
+
   def create
     purchase = Purchase.new(purchaser_id: current_user.id, item_id: params[:item_id])
     Item.transaction do
@@ -14,7 +23,7 @@ class PurchasesController < ApplicationController
         redirect_to action: "show", item_id: item.id, id: purchase.id
       else
         @presenter = NewPurchasePresenter.new(purchase, item)
-        render :new
+        render "sessions/new"
       end
     end
   end

@@ -11,8 +11,8 @@ class NewPurchasePresenter
     @purchase.item_id
   end
 
-  def buyer_email
-    @purchase.email
+  def purchaser_email
+    @purchase.purchaser.email
   end
 
   def item_name
@@ -24,7 +24,7 @@ class NewPurchasePresenter
   end
 
   def seller_email
-    @item.email
+    @item.seller.email
   end
 
   def errors

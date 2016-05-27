@@ -1,4 +1,8 @@
 describe User do
+<<<<<<< HEAD
+=======
+
+>>>>>>> 11454f937d75a23f00ead8c05fa2ad8dcf70429c
   context "valid user" do
     let(:user) { User.new(username: "Jeff", email: "rogerthat@example.com", password: "intriguing") }
     it "has a username" do
@@ -50,4 +54,7 @@ describe User do
     end
   end
 end
+<<<<<<< HEAD
 
+=======
+>>>>>>> 11454f937d75a23f00ead8c05fa2ad8dcf70429c

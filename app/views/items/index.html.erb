@@ -16,9 +16,9 @@
     <div class="col-xs-12 col-md-4 col-lg-3">
       <div class="row, item-container">
         <div class="col-md-12, item-details-container">
-          <div  class="items-index-image-container">  <%= image_tag(item.image, size: "100") %> </div>
+          <div  class="items-index-image-container">  <%= image_tag(asset_path(item.image), size: "100") %> </div>
           <div class="title-price"> <strong> <%= item.name.capitalize %> : $<%= item.price %> </strong></div>
-          <%= button_to "Buy Now", new_purchase_path( item_id: item.id ), class: "btn btn-xs, btn-buy-now" %>
+          <%= button_to "Buy Now", create_purchase_path( item_id: item.id ), class: "btn btn-xs, btn-buy-now" %>
           <p class="item-description">  <%= item.description %></p>
         </div>
       </div>

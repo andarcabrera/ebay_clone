@@ -3,8 +3,10 @@ require 'purchase/presenters/new_purchase_presenter'
 
 describe NewPurchasePresenter do
 
-  let (:purchase) { double "purchase", email: "areyouthere@email.com", item_id: 3 }
-  let (:item) { double "item", name: "phone", description: "smart", price: 3, email: "hey@you.com" }
+  let (:seller) { double "seller", id: 3, email: "hey@you.com" }
+  let (:purchaser) { double "purchaser", id: 3, email: "areyouthere@email.com" }
+  let (:purchase) { double "purchase", id: 3, purchaser: purchaser, purchaser_id: purchaser.id, item_id: item.id }
+  let (:item) { double "item", id: 3, seller: seller, name: "phone", description: "smart", price: 3, seller_id: seller.id }
   let (:presenter) { NewPurchasePresenter.new(purchase, item) }
 
   it "returns the purchase it's given" do
@@ -19,12 +21,12 @@ describe NewPurchasePresenter do
 
   it "return the item_id" do
 
-    expect(presenter.item_id).to eq(3)
+    expect(presenter.item_id).to eq(item.id)
   end
 
-  it "returns the buyer's email" do
+  it "returns the purchaser's email" do
 
-    expect(presenter.buyer_email).to eq("areyouthere@email.com")
+    expect(presenter.purchaser_email).to eq("areyouthere@email.com")
   end
 
   it "returns the item name" do
