@@ -5,13 +5,13 @@ class Bid < ActiveRecord::Base
   belongs_to :item
 
   def verify_amount
-    if amount && amount < Item.find(item_id).current_bid
+    if amount && amount < item.current_bid
       errors.add(:amount, "Please bid higher than the current bid")
     end
   end
 
   def verify_availability
-    if !Item.find(item_id).available
+    if !item.available
       errors.add(:unavailable_item, "The item is no longer available")
     end
   end
