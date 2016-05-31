@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   has_many :listings, class_name: "Item", foreign_key: :seller_id
+  has_many :bids, class_name: "Bid", foreign_key: :bidder_id
 
   def self.authenticate(credentials)
     user = User.find_by(email: credentials[:email])
