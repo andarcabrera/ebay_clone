@@ -56,8 +56,8 @@ describe User do
   context "a user has many items" do
     it "retrieves the items a user has" do
       user = User.create(username: "mrEnthusiatic", email: "awesomesauce@example.com", password: "what?!!!!")
-      item1 = Item.create(name: "velociraptor", description: "watch out", price: 600, seller_id: user.id)
-      item2 = Item.create(name: "centaur", description: "mythical", price: 540, seller_id: user.id)
+      item1 = Item.create(name: "velociraptor", description: "watch out", buy_it_now_price: 600, seller_id: user.id)
+      item2 = Item.create(name: "centaur", description: "mythical", buy_it_now_price: 540, seller_id: user.id)
 
       expect(user.listings).to eq([item1, item2])
     end

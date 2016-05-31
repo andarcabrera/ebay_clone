@@ -3,7 +3,7 @@ require 'sidekiq/testing'
 describe SendPurchaseMail do
   let (:seller) { User.create(username: "bagel", email: "bring@itback.com", password: "plaincreamcheese") }
   let (:purchaser) { User.create(username: "oatmeal", email: "brownsugar@melt.com", password: "noquinoa") }
-  let(:item) { Item.create(name: "shirt", description: "cotton", price: 1, seller_id: seller.id) }
+  let(:item) { Item.create(name: "shirt", description: "cotton", buy_it_now_price: 1, seller_id: seller.id) }
   let(:purchase) { Purchase.create(purchaser_id: purchaser.id, item_id: item.id) }
   let(:mailer) { double 'ItemSoldMailer' }
 

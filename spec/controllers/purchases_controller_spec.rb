@@ -3,7 +3,7 @@ require 'rails_helper'
 describe PurchasesController do
 
   let (:seller) { User.create(username: "bagel", email: "bring@itback.com", password: "plaincreamcheese") }
-  let (:item) { Item.create(name: "gloves", description: "they fit", price: 89, seller_id: seller.id) }
+  let (:item) { Item.create(name: "gloves", description: "they fit", buy_it_now_price: 89, seller_id: seller.id) }
   let (:purchaser) { User.create(username: "oatmeal", email: "brownsugar@melt.com", password: "noquinoa") }
 
   context "purchase successful" do

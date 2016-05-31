@@ -6,7 +6,7 @@ describe NewPurchasePresenter do
   let (:seller) { double "seller", id: 3, email: "hey@you.com" }
   let (:purchaser) { double "purchaser", id: 3, email: "areyouthere@email.com" }
   let (:purchase) { double "purchase", id: 3, purchaser: purchaser, purchaser_id: purchaser.id, item_id: item.id }
-  let (:item) { double "item", id: 3, seller: seller, name: "phone", description: "smart", price: 3, seller_id: seller.id }
+  let (:item) { double "item", id: 3, seller: seller, name: "phone", description: "smart", buy_it_now_price: 3, seller_id: seller.id }
   let (:presenter) { NewPurchasePresenter.new(purchase, item) }
 
   it "returns the purchase it's given" do
@@ -34,9 +34,9 @@ describe NewPurchasePresenter do
     expect(presenter.item_name).to eq("phone")
   end
 
-  it "returns item price" do
+  it "returns item buy_it_now_price" do
 
-    expect(presenter.item_price).to eq(3)
+    expect(presenter.item_buy_it_now_price).to eq(3)
   end
 
   it "return the seller's email" do

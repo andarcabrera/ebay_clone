@@ -5,7 +5,7 @@ describe ItemSoldMailer do
   let (:seller) { double "seller", id: 3, email: "hey@you.com" }
   let (:purchaser) { double "purchaser", id: 3, email: "areyouthere@email.com" }
   let (:purchase) { double "purchase", id: 3, purchaser: purchaser, purchaser_id: purchaser.id, item_id: item.id }
-  let (:item) { double "item", id: 3, seller: seller, name: "phone", description: "smart", price: 3, seller_id: seller.id }
+  let (:item) { double "item", id: 3, seller: seller, name: "phone", description: "smart", buy_it_now_price: 3, seller_id: seller.id }
   let (:presenter) { NewPurchasePresenter.new(purchase, item) }
   let(:mail) { described_class.notify_seller(purchase, item).deliver_now }
 
@@ -32,6 +32,6 @@ describe ItemSoldMailer do
   it "the body of the email contains the item details" do
 
     expect(mail.body).to include(item.name)
-    expect(mail.body).to include(item.price)
+    expect(mail.body).to include(item.buy_it_now_price)
   end
 end

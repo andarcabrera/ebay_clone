@@ -19,8 +19,8 @@ class NewPurchasePresenter
     @item.name
   end
 
-  def item_price
-    @item.price
+  def item_buy_it_now_price
+    @item.buy_it_now_price
   end
 
   def seller_email
