@@ -1,5 +1,9 @@
 class BidsController < ApplicationController
 
+  before_action do
+    check_current_user("You need to be logged in to bid on this item")
+  end
+
   def create
     bid = Bid.new(item_id: params[:item_id], bidder_id: current_user.id, amount: params[:bid][:amount])
     Item.transaction do

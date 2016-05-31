@@ -5,7 +5,7 @@ class Bid < ActiveRecord::Base
   belongs_to :item
 
   def verify_amount
-    if amount < Item.find(item_id).current_bid
+    if amount && amount < Item.find(item_id).current_bid
       errors.add(:amount, "Please bid higher than the current bid")
     end
   end
