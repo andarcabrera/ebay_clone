@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  validates :name, :description, :buy_it_now_price, :seller_id, presence: true
+  validates :name, :description, :seller_id, presence: true
 
   scope :available, -> { where(available: true) }
 
