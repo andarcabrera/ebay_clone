@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get  "/items"                             =>  "items#index"
   get  "/items/new"                         =>  "items#new"
   post "/items"                             =>  "items#create"
+  get  "/items/:id"                         =>  "items#show", as: 'item'
   post "/items/:item_id/purchases"          =>  "purchases#create", as: 'create_purchase'
   get  "/items/:item_id/purchases/:id"      =>  "purchases#show"
   get  "/users/new"                         =>  "users#new"

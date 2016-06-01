@@ -17,8 +17,9 @@
       <div class="row, item-container">
         <div class="col-md-12, item-details-container">
           <div  class="items-index-image-container">  <%= image_tag(asset_path(item.image), size: "100") %> </div>
-          <div class="title-price"> <strong> <%= item.name.capitalize %> : $<%= item.price %> </strong></div>
-          <%= button_to "Buy Now", create_purchase_path( item_id: item.id ), class: "btn btn-xs btn-buy-now" %>
+          <div class="title-price"> <strong> <%= item.name.capitalize %> </strong></div>
+           <p> Starting Price: $<%= item.starting_bid_price %> </p>
+          <%= button_to "See Details", item_path( id: item.id ), class: "btn btn-xs btn-buy-now" %>
           <p class="item-description">  <%= item.description %></p>
         </div>
       </div>

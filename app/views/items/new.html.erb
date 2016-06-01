@@ -8,8 +8,12 @@
     <%= f.text_field :name, size: 60 %><br><br>
     <%= f.label :description %><br>
     <%= f.text_area :description, :cols => 60, :rows => 10 %><br><br>
-    <%= f.label :price %><br>
-    <%= f.text_field :price, size: 60 %><br><br>
+    <%= f.label :buy_it_now_price %><br>
+    <%= f.text_field :buy_it_now_price, size: 60 %><br><br>
+    <%= f.label :starting_bid_price %><br>
+    <%= f.text_field :starting_bid_price, size: 60 %><br><br>
+    <%= f.label :auction_end_time %><br>
+    <%= f.datetime_select :auction_end_time, size: 60 %><br><br>
     <div class="file-field-wrapper">
       <%= f.label :image %>
       <%= f.file_field :image %><br>
