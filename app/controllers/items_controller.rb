@@ -1,5 +1,6 @@
 require 'item_marketplace/presenters/items_index_presenter'
 require 'item_marketplace/presenters/new_item_presenter'
+require 'item_marketplace/presenters/item_presenter'
 
 class ItemsController < ApplicationController
 
@@ -18,17 +19,18 @@ class ItemsController < ApplicationController
   def create
     item = Item.new(item_params)
     item.seller_id = current_user.id
-    @presenter = NewItemPresenter.new(item)
     if item.valid?
       item.save
       redirect_to items_path
     else
+      @presenter = NewItemPresenter.new(item)
       render :new, status: :unprocessable_entity
     end
   end
 
   def show
-    @item = Item.find(params[:id])
+    item = Item.find(params[:id])
+    @presenter = ItemPresenter.new(item)
   end
 
   private

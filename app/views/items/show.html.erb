@@ -1,12 +1,19 @@
 <div class="container new-item-form">
-  <div class="title-price"> <strong> <%= @item.name.capitalize %> </strong></div>
-  <p> <strong> Description:</strong>  <%= @item.description %></p>
-  <p> Buy it Now Price: $<%= @item.buy_it_now_price %> </p>
-  <%= button_to "Buy Now", create_purchase_path(item_id: @item.id), class: "btn btn-xs btn-buy-now" %>
-  <p> Starting Bid: $<%= @item.starting_bid_price %> </p>
-  <p> Current Bid: $<%= @item.highest_bid %> </p>
-  <%= form_tag create_bid_path(item_id: @item.id), method: :post, :class => "form-inline" do %>
+  <div class="title-price"> <strong> <%= @presenter.name %> </strong></div>
+  <p> <strong> Description:</strong>  <%= @presenter.description %></p>
+  <p> Buy it Now Price: $<%= @presenter.buy_it_now_price %> </p>
+  <%= button_to "Buy Now", create_purchase_path(item_id: @presenter.id), class: "btn btn-xs btn-buy-now" %>
+  <p> Starting Bid: $<%= @presenter.starting_bid_price %> </p>
+  <p> Current Bid: $<%= @presenter.highest_bid %> </p>
+  <%= form_tag create_bid_path(item_id: @presenter.id), method: :post, :class => "form-inline" do %>
     <%= text_field_tag :amount %>
     <%= submit_tag "Place Bid", class: "btn btn-default" %>
+  <% end %>
+  <% if @presenter.errors %>
+    <ul>
+      <% @presenter.errors.each do |error| %>
+        <li> <%= error %> </li>
+      <% end %>
+    </ul>
   <% end %>
 </div>
