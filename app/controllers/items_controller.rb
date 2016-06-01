@@ -19,7 +19,8 @@ class ItemsController < ApplicationController
     item = Item.new(item_params)
     item.seller_id = current_user.id
     @presenter = NewItemPresenter.new(item)
-    if @presenter.item.save
+    if item.valid?
+      item.save
       redirect_to items_path
     else
       render :new, status: :unprocessable_entity
@@ -27,6 +28,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @item = Item.find(params[:id])
   end
 
   private

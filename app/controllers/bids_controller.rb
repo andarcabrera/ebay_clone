@@ -5,16 +5,19 @@ class BidsController < ApplicationController
   end
 
   def create
-    bid = Bid.new(item_id: params[:item_id], bidder_id: current_user.id, amount: params[:bid][:amount])
+    bid = Bid.new(item_id: params[:item_id], bidder_id: current_user.id, amount: params[:amount])
     Item.transaction do
-      item = Item.lock.find(params[:item_id])
+      @item = Item.lock.find(params[:item_id])
       if bid.valid?
         bid.save
-        item.update_attributes(available: false)
         redirect_to action: "show", item_id: bid.item_id, id: bid.id
       else
-        render "items/index", status: :unprocessable_entity
+        render "items/show", status: :unprocessable_entity
       end
     end
+  end
+
+  def show
+    @bid = Bid.find(params[:id])
   end
 end

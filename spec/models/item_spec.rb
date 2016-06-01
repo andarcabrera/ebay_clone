@@ -55,6 +55,11 @@ describe Item do
       item = create_invalid_item(name: "Jerome", description: "hot water", buy_it_now_price: 14)
       expect(item.errors).to include(:seller_id)
     end
+
+    it "doesn't save without either a starting_bid_price or a buy_it_now_price" do
+      item = create_invalid_item(name: "Jerome", description: "hot water", seller_id: seller.id)
+      expect(item.errors).to include(:price)
+    end
   end
 
   private
