@@ -3,7 +3,7 @@ require 'rails_helper'
 describe BidsController do
   let(:seller) { User.create(username: "muggle", email: "haveamug@example.com", password: "muggle4lyfe") }
   let(:bidder) { User.create(username: "mugger", email: "needamug@example.com", password: "muglyfe") }
-  let(:item) { Item.create(name: "mug", description: "black", current_bid: 200, seller_id: seller.id) }
+  let(:item) { Item.create(name: "mug", description: "black", starting_bid_price: 200, seller_id: seller.id) }
 
   context "bid is succesful" do
     before (:each) do
@@ -30,10 +30,9 @@ describe BidsController do
       expect(Bid.count).to eq(count + 1)
     end
 
-    it "updates the item's current_bid" do
+    it "updates the item's availability" do
       post :create, :item_id => item.id, :bid => { amount: 300 }
 
-      expect(Item.find(item.id).current_bid).to eq(300)
       expect(Item.find(item.id).available).to be false
     end
   end

@@ -5,9 +5,13 @@ class Bid < ActiveRecord::Base
   belongs_to :item
 
   def verify_amount
-    if amount && amount < item.current_bid
+    if amount && amount < largest_bid
       errors.add(:amount, "Please bid higher than the current bid")
     end
+  end
+
+  def largest_bid
+    Bid.maximum(:amount) || item.starting_bid_price
   end
 
   def verify_availability

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Bid do
   let(:seller) { User.create(username: "muggle", email: "haveamug@example.com", password: "muggle4lyfe") }
   let(:bidder) { User.create(username: "mugger", email: "needamug@example.com", password: "muglyfe") }
-  let(:item) { Item.create(name: "mug", description: "black", current_bid: 200, seller_id: seller.id) }
+  let(:item) { Item.create(name: "mug", description: "black", starting_bid_price: 200, seller_id: seller.id) }
   let(:bid) { Bid.create(item_id: item.id, bidder_id: bidder.id, amount: 300) }
 
   context "bid is valid" do

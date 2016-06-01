@@ -10,7 +10,8 @@ images = Dir.entries(File.open(File.join(Rails.root, "app/assets/images/sample_i
 
   item = user.listings.find_or_create_by(name: Faker::Lorem.word,
                          description: Faker::Lorem.paragraph,
-                         price: Faker::Number.number(2))
+                         starting_bid_price: Faker::Number.number(2),
+                         buy_it_now_price: Faker::Number.number(3))
 
   item.image.store!(File.open(File.join(Rails.root, File.join("app/assets/images/sample_images/", images.sample))))
   item.save

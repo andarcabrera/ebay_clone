@@ -25,16 +25,16 @@ ActiveRecord::Schema.define(version: 20160531113800) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.string   "name",                                                     null: false
-    t.text     "description",                                              null: false
-    t.decimal  "buy_it_now_price", precision: 10, scale: 2
+    t.string   "name",                                                       null: false
+    t.text     "description",                                                null: false
+    t.decimal  "buy_it_now_price",   precision: 10, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image"
-    t.boolean  "available",                                 default: true, null: false
-    t.integer  "seller_id",                                                null: false
+    t.boolean  "available",                                   default: true, null: false
+    t.integer  "seller_id",                                                  null: false
     t.datetime "auction_end_time"
-    t.decimal  "current_bid",      precision: 10, scale: 2
+    t.decimal  "starting_bid_price", precision: 10, scale: 2
   end
 
   create_table "purchases", force: :cascade do |t|

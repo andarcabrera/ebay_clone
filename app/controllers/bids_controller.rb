@@ -10,7 +10,7 @@ class BidsController < ApplicationController
       item = Item.lock.find(params[:item_id])
       if bid.valid?
         bid.save
-        item.update_attributes(available: false, current_bid: bid.amount)
+        item.update_attributes(available: false)
         redirect_to action: "show", item_id: bid.item_id, id: bid.id
       else
         render "items/index", status: :unprocessable_entity
