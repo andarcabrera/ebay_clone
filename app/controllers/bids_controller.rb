@@ -1,4 +1,5 @@
 require 'item_marketplace/presenters/item_presenter'
+require 'bids/presenters/bid_presenter'
 
 class BidsController < ApplicationController
 
@@ -21,6 +22,7 @@ class BidsController < ApplicationController
   end
 
   def show
-    @bid = Bid.find(params[:id])
+    bid = Bid.find(params[:id])
+    @presenter = BidPresenter.new(bid)
   end
 end
