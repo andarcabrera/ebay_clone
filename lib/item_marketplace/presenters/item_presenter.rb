@@ -35,4 +35,24 @@ class ItemPresenter
   def highest_bid
     @item.highest_bid
   end
+
+  def duration
+    duration = (@item.auction_end_time - Time.now.utc).round
+  end
+
+  def days
+    duration/86400
+  end
+
+  def hours
+    (duration%86400)/3600
+  end
+
+  def minutes
+    (duration%86400)%3600/60
+  end
+
+  def seconds
+    duration%60
+  end
 end

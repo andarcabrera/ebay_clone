@@ -46,4 +46,14 @@ describe ItemPresenter do
 
     expect(presenter.highest_bid).to eq(item.highest_bid)
    end
+
+   it "parses the countdown to the auction" do
+     allow_any_instance_of(ItemPresenter).to receive(:duration).and_return(359926)
+
+     expect(presenter.days).to  eq(4)
+     expect(presenter.hours).to eq(3)
+     expect(presenter.minutes).to eq(58)
+     expect(presenter.seconds).to eq(46)
+   end
+
 end

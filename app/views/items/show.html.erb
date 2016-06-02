@@ -9,6 +9,13 @@
     <%= text_field_tag :amount %>
     <%= submit_tag "Place Bid", class: "btn btn-default" %>
   <% end %>
+  <div id="countdown">
+    <p> Time Left Until End of Auction: </p>
+    <span id="days"> Days <%= @presenter.days %> </span>
+    <span id="hours"> Hours <%=  @presenter.hours %> </span>
+    <span id="minutes"> Minutes <%= @presenter.minutes %> </span>
+    <span id="seconds"> Seconds <%= @presenter.seconds %> </span>
+  </div>
   <% if @presenter.errors %>
     <ul>
       <% @presenter.errors.each do |error| %>
