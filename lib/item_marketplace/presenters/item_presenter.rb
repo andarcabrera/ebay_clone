@@ -55,4 +55,8 @@ class ItemPresenter
   def seconds
     duration%60
   end
+
+  def auction_end_time
+    @item.auction_end_time
+  end
 end
