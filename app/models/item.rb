@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
   validates :name, :description, :seller_id, presence: true
-  validate :price
+  validate :price, :auction_details, :auction_duration
 
   scope :available, -> { where(available: true) }
 
@@ -17,6 +17,18 @@ class Item < ActiveRecord::Base
   def price
     if !buy_it_now_price && !starting_bid_price
       errors.add(:price, "you need to select either a starting bid or a buy it now price")
+    end
+  end
+
+  def auction_details
+    if (starting_bid_price && !auction_end_time) || (!starting_bid_price && auction_end_time)
+      errors.add(:auction_details, "you must select a starting_bid and auction end time")
+    end
+  end
+
+  def auction_duration
+    if auction_end_time && (auction_end_time - Time.now) <= 3600
+      errors.add(:auction_duration, "you cannot schedule an auction to be under an hour")
     end
   end
 end

@@ -136,7 +136,7 @@ describe ItemsController do
 
   context "item show page is requested" do
     let(:user) { User.create(username: "dreamteam", email: "us@dream.com", password_hash: "zzzzzzz") }
-    let(:item) { Item.create(name: "a", description: "A", buy_it_now_price: 17, starting_bid_price: 4, seller_id: user.id) }
+    let(:item) { Item.create(name: "a", description: "A", buy_it_now_price: 17, seller_id: user.id) }
     before(:each) do
       login_user(user)
     end

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe BidsController do
   let(:seller) { User.create(username: "muggle", email: "haveamug@example.com", password: "muggle4lyfe") }
   let(:bidder) { User.create(username: "mugger", email: "needamug@example.com", password: "muglyfe") }
-  let(:item) { Item.create(name: "mug", description: "black", starting_bid_price: 200, seller_id: seller.id) }
+  let(:item) { Item.create(name: "mug", description: "black", starting_bid_price: 200, seller_id: seller.id, auction_end_time: "2019-06-01 12:00:00 -0600") }
 
   context "bid is successful" do
     before (:each) do

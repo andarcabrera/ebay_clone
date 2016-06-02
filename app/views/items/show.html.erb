@@ -10,12 +10,14 @@
     <%= submit_tag "Place Bid", class: "btn btn-default" %>
   <% end %>
   <div id="countdown">
-    <p> Auction ends: <span id="auction_end_time"> <%= @presenter.auction_end_time %> </span></p>
-    <p> Time Left Until End of Auction: </p>
-    Days <span id="days"> <%= @presenter.days %> </span>
-    Hours <span id="hours"><%=  @presenter.hours %> </span>
-    Minutes <span id="minutes"> <%= @presenter.minutes %> </span>
-    Seconds <span id="seconds"> <%= @presenter.seconds %> </span>
+    <p> Auction Details: <span id="auction_end_time"> <%= @presenter.auction_end_time %> </span></p>
+    <% if @presenter.auction_ongoing %>
+      <p> Time Left Until End of Auction: </p>
+      Days <span id="days"> <%= @presenter.days %> </span>
+      Hours <span id="hours"><%=  @presenter.hours %> </span>
+      Minutes <span id="minutes"> <%= @presenter.minutes %> </span>
+      Seconds <span id="seconds"> <%= @presenter.seconds %> </span>
+    <% end %>
   </div>
   <% if @presenter.errors %>
     <ul>

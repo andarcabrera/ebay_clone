@@ -3,7 +3,7 @@ require 'sidekiq/testing'
 describe AuctionWorker do
   let (:seller) { User.create(username: "bagel", email: "bring@itback.com", password: "plaincreamcheese") }
   let (:bidder) { User.create(username: "oatmeal", email: "brownsugar@melt.com", password: "noquinoa") }
-  let(:item) { Item.create(name: "shirt", description: "cotton", starting_bid_price: 1, seller_id: seller.id) }
+  let(:item) { Item.create(name: "shirt", description: "cotton", starting_bid_price: 1, seller_id: seller.id, auction_end_time: "2019-06-01 12:00:00 -0600") }
   let(:bid) { Bid.create(bidder_id: bidder.id, item_id: item.id, amount: 300) }
   let(:mailer) { double 'ItemSoldMailer' }
 

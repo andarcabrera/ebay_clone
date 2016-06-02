@@ -47,6 +47,24 @@ describe ItemPresenter do
     expect(presenter.highest_bid).to eq(item.highest_bid)
    end
 
+   it "returns the item auction_end_time" do
+    allow(item).to receive(:auction_end_time).and_return(Time.now + 3700)
+
+    expect(presenter.auction_end_time).to eq(item.auction_end_time)
+   end
+
+   it "returns true if the auction is ongoing" do
+     allow(item).to receive(:auction_end_time).and_return(Time.now + 3700)
+
+     expect(presenter.auction_ongoing).to be true
+   end
+
+   it "reurns false if the auction is over" do
+     allow(item).to receive(:auction_end_time).and_return(Time.now - 500)
+
+     expect(presenter.auction_ongoing).to be false
+   end
+
    it "parses the countdown to the auction" do
      allow_any_instance_of(ItemPresenter).to receive(:duration).and_return(359926)
 
@@ -55,5 +73,4 @@ describe ItemPresenter do
      expect(presenter.minutes).to eq(58)
      expect(presenter.seconds).to eq(46)
    end
-
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Item do
   context "item is valid" do
     let(:seller) { User.create(username: "Mr. Cheetos", email: "cheesy@cheese.com", password: "itainteastbeingcheesy") }
-    let(:item) { Item.create(name: "socks", description: "they come in pairs", buy_it_now_price: 10, seller_id: seller.id, auction_end_time: "2016-06-01 12:00:00 -0600") }
+    let(:item) { Item.create(name: "socks", starting_bid_price: 30, description: "they come in pairs", buy_it_now_price: 10, seller_id: seller.id, auction_end_time: "2019-06-01 12:00:00 -0600") }
 
     it "has a name" do
 
@@ -30,9 +30,14 @@ describe Item do
       expect(item.available).to eq(true)
     end
 
+    it "has a starting_bid_price" do
+
+      expect(item.starting_bid_price).to eq(30)
+    end
+
     it "has an auction end time" do
 
-      expect(item.auction_end_time).to eq(DateTime.new(2016, 6, 1, 12, 0, 0, '-6'))
+      expect(item.auction_end_time).to eq(DateTime.new(2019, 6, 1, 12, 0, 0, '-6'))
     end
   end
 
@@ -53,12 +58,26 @@ describe Item do
 
     it "doesn't save without a seller_id" do
       item = create_invalid_item(name: "Jerome", description: "hot water", buy_it_now_price: 14)
+
       expect(item.errors).to include(:seller_id)
     end
 
     it "doesn't save without either a starting_bid_price or a buy_it_now_price" do
       item = create_invalid_item(name: "Jerome", description: "hot water", seller_id: seller.id)
+
       expect(item.errors).to include(:price)
+    end
+
+    it "doesn't save without complete auction details" do
+      item = create_invalid_item(name: "Jerome", description: "hot water", starting_bid_price: 45, seller_id: seller.id)
+
+      expect(item.errors).to include(:auction_details)
+    end
+
+    it "doesn't save if time until auction_end_time is less than 2 hours" do
+      item = create_invalid_item(name: "Jerome", description: "hot water", starting_bid_price: 45, auction_end_time: "2016-06-01 12:00:00 -0600", seller_id: seller.id)
+
+      expect(item.errors).to include(:auction_duration)
     end
   end
 
