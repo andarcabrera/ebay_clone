@@ -21,6 +21,9 @@ class ItemsController < ApplicationController
     item.seller_id = current_user.id
     if item.valid?
       item.save
+      if item.auction_end_time && item.starting_bid_price
+        AuctionWorker.perform_in(auction_duration(item).seconds, item.id)
+      end
       redirect_to items_path
     else
       @presenter = NewItemPresenter.new(item)
@@ -36,6 +39,10 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :buy_it_now_price, :image)
+    params.require(:item).permit(:name, :description, :buy_it_now_price, :starting_bid_price, :auction_end_time, :image)
+  end
+
+  def auction_duration(item)
+    item.auction_end_time - Time.now.utc
   end
 end

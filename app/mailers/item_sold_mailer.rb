@@ -7,5 +7,11 @@ class ItemSoldMailer < ActionMailer::Base
     @purchase_details = NewPurchasePresenter.new(purchase, item)
     mail(to: @purchase_details.seller_email, subject: "Item Sold")
   end
+
+
+  def notify_after_auction(purchase, item)
+    @purchase_details = NewPurchasePresenter.new(purchase, item)
+    mail(to: @purchase_details.purchaser_email, subject: "Auction over. You won!")
+  end
 end
 
