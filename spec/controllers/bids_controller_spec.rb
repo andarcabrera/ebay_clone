@@ -75,12 +75,11 @@ describe BidsController do
         expect(response.content_type).to eq("text/html")
       end
 
-      it "should render the items index page" do
+      it "should render the items show page" do
         item.update_attributes(available: false)
         post :create, :item_id => item.id, :amount => 400
 
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("text/html")
+        expect(response).to render_template(:show)
       end
     end
 
@@ -96,11 +95,10 @@ describe BidsController do
         expect(response.content_type).to eq("text/html")
       end
 
-      it "should render the items index page" do
+      it "should render the items show page" do
         post :create, :item_id => item.id
 
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("text/html")
+        expect(response).to render_template(:show)
       end
     end
   end
