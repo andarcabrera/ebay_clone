@@ -6,13 +6,13 @@ class Bid < ActiveRecord::Base
 
   def verify_amount
     if amount && amount <= item.highest_bid
-      errors.add(:amount, "Please bid higher than the current bid")
+      errors.add(:amount, "Please bid higher than the current bid.")
     end
   end
 
   def verify_availability
     if !item.available
-      errors.add(:unavailable_item, "The item is no longer available")
+      errors.add(:unavailable_item, "The item is no longer available.")
     end
   end
 end
