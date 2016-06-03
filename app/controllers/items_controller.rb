@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
     if item.valid?
       item.save
       if auctioned?(item)
-        AuctionWorker.perform_in(auction_duration(item).seconds, item.id)
+        AuctionWorker.perform_in(auction_duration(item), item.id)
       end
       redirect_to items_path
     else
