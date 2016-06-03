@@ -39,25 +39,26 @@ describe ItemsController do
 
   context "new item is created successfully" do
     let(:user) { User.create(username: "dreamteam", email: "us@dream.com", password_hash: "zzzzzzz") }
+    let(:item_params) { {name: "ping-pong paddle", description: "you beat Alex with it", buy_it_now_price: 1, user_id: user.id} }
     before(:each) do
       login_user(user)
     end
 
     it "response redirect" do
-      post :create, :item => {name: "a", description: "A", buy_it_now_price: 1, user_id: user.id}
+      post :create, :item => item_params
 
       expect(response).to have_http_status(:redirect)
       expect(response.content_type).to eq("text/html")
     end
 
     it "redirects to items index" do
-      post :create, :item => {name: "a", description: "some description", buy_it_now_price: 1, user_id: user.id}
+      post :create, :item => item_params
 
       expect(response).to redirect_to items_path
     end
 
     it "adds the item to the database" do
-      post :create, :item => {name: "ping-pong paddle", description: "you beat Alex with it", buy_it_now_price: 1, user_id: user.id}
+      post :create, :item => item_params
 
       expect(Item.first.name).to eq("ping-pong paddle")
       expect(Item.count).to eq(1)
