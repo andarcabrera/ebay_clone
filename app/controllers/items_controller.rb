@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
     item.seller_id = current_user.id
     if item.valid?
       item.save
-      if auctioned?(item)
+      if item.auctioned?
         AuctionWorker.perform_in(auction_duration(item), item.id)
       end
       redirect_to items_path
@@ -44,9 +44,5 @@ class ItemsController < ApplicationController
 
   def auction_duration(item)
     item.auction_end_time - Time.now.utc
-  end
-
-  def auctioned?(item)
-    item.auction_end_time && item.starting_bid_price
   end
 end

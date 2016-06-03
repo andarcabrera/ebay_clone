@@ -13,6 +13,10 @@ class Item < ActiveRecord::Base
     bids.maximum(:amount) || starting_bid_price
   end
 
+  def auctioned?
+    auction_end_time && starting_bid_price
+  end
+
   def price
     if !buy_it_now_price && !starting_bid_price
       errors.add(:price, "You need to select either a starting bid or a buy it now price.")
