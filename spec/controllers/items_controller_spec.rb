@@ -136,23 +136,34 @@ describe ItemsController do
   end
 
   context "item show page is requested" do
-    let(:user) { User.create(username: "dreamteam", email: "us@dream.com", password_hash: "zzzzzzz") }
-    let(:item) { Item.create(name: "a", description: "A", buy_it_now_price: 17, seller_id: user.id) }
-    before(:each) do
-      login_user(user)
+    context "existing item is requested" do
+      let(:user) { User.create(username: "dreamteam", email: "us@dream.com", password_hash: "zzzzzzz") }
+      let(:item) { Item.create(name: "a", description: "A", buy_it_now_price: 17, seller_id: user.id) }
+      before(:each) do
+        login_user(user)
+      end
+
+      it "response is successful" do
+        get :show, :id => item.id
+
+        expect(response).to have_http_status(:success)
+        expect(response.content_type).to eq("text/html")
+      end
+
+      it "renders the show template" do
+        get :show, :id => item.id
+
+        expect(response).to render_template(:show)
+      end
     end
 
-    it "response is successful" do
-      get :show, :id => item.id
+    context "non-existing item is requested" do
+      it "renders 404 page" do
+        get :show, id: 5
 
-      expect(response).to have_http_status(:success)
-      expect(response.content_type).to eq("text/html")
-    end
-
-    it "renders the show template" do
-      get :show, :id => item.id
-
-      expect(response).to render_template(:show)
+        expect(response).to have_http_status(:not_found)
+        expect(response).to render_template(:file => "#{Rails.root}/public/404.html")
+      end
     end
   end
 

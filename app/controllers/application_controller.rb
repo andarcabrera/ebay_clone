@@ -14,8 +14,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def record_not_found
-    message = "Item with ID #{params[:id]} not found."
-    flash[:not_found] = message
-    redirect_to items_path
+    render :file => 'public/404.html', :status => :not_found
   end
 end
