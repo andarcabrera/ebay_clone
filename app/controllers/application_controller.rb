@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   include SessionHelper
 
   def check_current_user(message)
@@ -9,4 +11,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  protected
+
+  def record_not_found
+    message = "Item with ID #{params[:id]} not found."
+    flash[:not_found] = message
+    redirect_to items_path
+  end
 end
