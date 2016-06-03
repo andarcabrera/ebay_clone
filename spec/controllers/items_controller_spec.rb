@@ -120,7 +120,7 @@ describe ItemsController do
 
     context "no current_user" do
       let(:user) { User.create(username: "dreamteam", email: "us@dream.com", password_hash: "zzzzzzz") }
-      it "renders new template" do
+      it "redirects to log_in path" do
         post :create, :item => {name: "", description: "A", buy_it_now_price: 1, user_id: user.id}
 
         expect(response).to have_http_status(:redirect)
