@@ -38,5 +38,12 @@ describe Purchase do
 
       expect(invalid_purchase.errors).to include(:available_item)
     end
+
+    it "doesn't purchase the item is the auction is over" do
+      Item.where(id: item.id).update_all(auction_end_time: Time.now - 2.days)
+      invalid_purchase = Purchase.create(purchaser_id: purchaser.id, item_id: item.id)
+
+      expect(invalid_purchase.errors).to include(:auction_over)
+    end
   end
 end
