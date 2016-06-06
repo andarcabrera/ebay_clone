@@ -3,23 +3,23 @@
     <div class="title-price"> <strong>Name: </strong><%= @presenter.name %> </div>
     <p> <strong> Description:</strong>  <%= @presenter.description %></p>
     <p> <strong>Buy It Now Price: $<%= @presenter.buy_it_now_price %></strong> </p>
-    <%= button_to "Buy Now", create_purchase_path(item_id: @presenter.id), class: "btn btn-xs btn-buy-now" %>
+    <%= button_to "Buy Now", create_purchase_path(item_id: @presenter.id), class: "btn btn-xs btn-buy-now", id: "buy_now_button" %>
   </div>
   <div class="col-xs-12 col-md-6">
     <p> <strong>Starting Bid:</strong> $<%= @presenter.starting_bid_price %> </p>
     <p> <strong>Current Bid: </strong>$<%= @presenter.highest_bid %> </p>
-    <%= form_tag create_bid_path(item_id: @presenter.id), method: :post, :class => "form-inline" do %>
+    <%= form_tag create_bid_path(item_id: @presenter.id), method: :post, :class => "form-inline", id: "bid_now_form" do %>
       <%= text_field_tag :amount %>
-      <%= submit_tag "Place Bid", class: "btn btn-default, btn-buy-now" %>
+      <%= submit_tag "Place Bid", class: "btn btn-default, btn-buy-now"%>
     <% end %><br>
     <div id="countdown">
       <p> Auction Details: <span id="auction_end_time"> <%= @presenter.auction_end_time %> </span></p>
       <% if @presenter.auction_ongoing %>
         <p> Auction ends in:
-         <span id="days"> <%= @presenter.days %> </span> days
-         <span id="hours"><%=  @presenter.hours %> </span> hours
-         <span id="minutes"> <%= @presenter.minutes %> </span> minutes
-         <span id="seconds"> <%= @presenter.seconds %> </span> seconds
+        <span id="days"> <%= @presenter.days %> </span> days
+        <span id="hours"><%=  @presenter.hours %> </span> hours
+        <span id="minutes"> <%= @presenter.minutes %> </span> minutes
+        <span id="seconds"> <%= @presenter.seconds %> </span> seconds
       <% end %>
         </p>
     </div>
@@ -32,3 +32,12 @@
     </ul>
   <% end %>
 </div>
+<script>
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+
+
+
+
+
