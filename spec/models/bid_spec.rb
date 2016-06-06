@@ -32,9 +32,16 @@ describe Bid do
     it "does not create bid if amount is smaller  than current bid" do
       item.available = false
       item.save
-      invalid_bid =  Bid.create(item_id: item.id, bidder_id: bidder.id, amount: 500)
+      invalid_bid = Bid.create(item_id: item.id, bidder_id: bidder.id, amount: 500)
 
       expect(invalid_bid.errors).to include(:unavailable_item)
+    end
+
+    it "does not create a bid if the auction is over" do
+      Item.where(id: item.id).update_all(auction_end_time: Time.now - 2.days)
+      invalid_bid = Bid.create(item_id: item.id, bidder_id: bidder.id, amount: 602)
+
+      expect(invalid_bid.errors).to include(:auction_over)
     end
   end
 end
