@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     if user.valid?
       user.password = user_params[:password]
       user.save
+      session[:user_id] = user.id
       redirect_to items_path
     else
       render :new, status: :unprocessable_entity
