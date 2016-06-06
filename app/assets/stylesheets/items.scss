@@ -24,6 +24,7 @@
   color: #F4DEC8;
   font-weight: bold;
   border-color: #94618E;
+  margin-top: 30em;
 }
 
 .items-index-image-container {
@@ -65,4 +66,18 @@
 .file-field-wrapper {
   width: 100px;
   margin: auto;
+  margin-bottom: 3em;
+}
+
+.new-item-form input {
+  display: block;
+  margin: auto;
+}
+
+.new-item-form label {
+  display: block;
+  bottom-margin: 30em;
+  margin: auto;
+  padding-bottom: 1em;
+  padding-top: 2em;
 }
