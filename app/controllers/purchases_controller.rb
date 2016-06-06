@@ -17,7 +17,10 @@ class PurchasesController < ApplicationController
         send_email(purchase.id, item.id)
         redirect_to action: "show", item_id: item.id, id: purchase.id
       else
+<<<<<<< HEAD
         @presenter = ItemsIndexPresenter.new(Item.available.limit(100))
+=======
+>>>>>>> fced366baf3eb15eb3cc51bdb8d5d61a5659d236
         render "items/index", status: :unprocessable_entity
       end
     end
