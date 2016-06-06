@@ -16,7 +16,7 @@ class Purchase < ActiveRecord::Base
   end
 
   def auction_over
-    if item.auction_end_time <= Time.now
+    if item && item.auctioned? && item.auction_end_time <= Time.now
       errors.add(:auction_over, "You can no longer bid on this item. The auction is over.")
     end
   end
