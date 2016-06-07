@@ -33,8 +33,20 @@
   <% end %>
 </div>
 <script>
-updateCountdown();
-setInterval(updateCountdown, 1000);
+
+var trackingElements = {
+  days: $("#days"),
+  hours: $("#hours"),
+  minutes: $("#minutes"),
+  seconds: $("#seconds"),
+  auction_end_time: $("#auction_end_time"),
+  buy_now_button: $("#buy_now_button"),
+  bid_now_form: $("#bid_now_form")
+};
+
+var countdown = new Countdown(trackingElements)
+countdown.start()
+
 </script>
 
 
