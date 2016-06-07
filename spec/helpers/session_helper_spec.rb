@@ -6,8 +6,9 @@ describe SessionHelper do
     expect(current_user.id).to eq(user.id)
   end
 
-   it "returns nil if the session is invalid" do
+  it "returns nil if the session is invalid" do
     session[:user_id] = nil
-     expect(current_user).to be_nil
-   end
+
+    expect(current_user).to be_nil
+  end
 end
