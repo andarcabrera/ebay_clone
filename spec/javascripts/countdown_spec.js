@@ -2,73 +2,90 @@
 //= require countdown
 
 describe("Coundown", function() {
-
-
   describe("auction is on going", function() {
-    beforeEach(function (){
-      this.auctionEndTime = Date.now() + 237300000;
-      fixture.set('<p id="auction_end_time">' + new Date(this.auctionEndTime) + '</p> <p id="days">days</p> </p>' +
-          '<p id="hours">hours</p>' + '<p id="minutes">minutes</p>' + '<p id="seconds">seconds</p>' + '<button id="buy_now_button">' + '<p id="bid_now_form"></p>');
+    beforeEach(function(){
+      this.endTime = Date.now() + 237300000;
+      fixture.set('<p id="end_time">' + new Date(this.endTime) + '</p>'
+          + '<p id="days"></p>'
+          + '<p id="hours"></p>'
+          + '<p id="minutes"></p>'
+          + '<p id="seconds"></p>'
+          + '<p id="on-end-test">change on end</p>');
+
+      this.domDays = document.getElementById("days");
+      this.domHours = document.getElementById("hours");
+      this.domMinutes = document.getElementById("minutes");
+      this.domSeconds = document.getElementById("seconds");
+      this.domEndTime = document.getElementById("end_time").innerHTML;
+      this.domOnEnd = document.getElementById("on-end-test");
+
       this.trackingElements = {
-        days: $("#days"),
-        hours: $("#hours"),
-        minutes: $("#minutes"),
-        seconds: $("#seconds"),
-        auction_end_time: $("#auction_end_time"),
-        buy_now_button: $("#buy_now_button"),
-        bid_now_form: $("#bid_now_form")
+        days: this.domDays,
+        hours: this.domHours,
+        minutes: this.domMinutes,
+        seconds: this.domSeconds
       };
-      this.countdown = new Countdown(this.trackingElements);
+
+      this.countdown = new Countdown(this.domEndTime, this.trackingElements);
+      this.countdown.onEnd(function() {
+        document.getElementById("on-end-test").innerHTML = "it changed!";
+      });
       this.countdown.start();
     });
 
     it("updates countdown in the dom", function() {
 
-      expect($("#days", fixture.el).text()).toBe("2");
-      expect($("#hours", fixture.el).text()).toBe("17");
-      expect($("#minutes", fixture.el).text()).toBe("54");
-      expect($("#seconds", fixture.el).text()).toBe("59");
-      expect($("#auction_end_time", fixture.el).text()).toEqual(new Date(this.auctionEndTime).toString());
+      expect(this.domDays.innerHTML).toBe("2");
+      expect(this.domHours.innerHTML).toBe("17");
+      expect(this.domMinutes.innerHTML).toBe("54");
+      expect(this.domSeconds.innerHTML).toBe("59");
     });
 
-    it("does not hide the auction end time and buy now buttons", function() {
+    it("does not modify the on end DOM element", function() {
 
-      expect($('#buy_now_button').is(':visible')).toBe(true);
-      expect($('#bid_now_form').is(':visible')).toBe(true);
+      expect(this.domOnEnd.innerHTML).toBe("change on end");
     });
   });
 
   describe("auction is closed", function() {
     beforeEach(function (){
-      this.auctionEndTime = Date.now() - 237300000;
-      fixture.set('<p id="auction_end_time">' + new Date(this.auctionEndTime) + '</p> <p id="days">days</p> </p>' +
-          '<p id="hours">hours</p>' + '<p id="minutes">minutes</p>' + '<p id="seconds">seconds</p>' + '<button id="buy_now_button">' + '<p id="bid_now_form"></p>');
+      this.endTime = Date.now() - 237300000;
+      fixture.set('<p id="end_time">' + new Date(this.endTime) + '</p>'
+          + '<p id="days"></p>'
+          + '<p id="hours"></p>'
+          + '<p id="minutes"></p>'
+          + '<p id="seconds"></p>'
+          + '<p id="on-end-test">change on end</p>');
+
+      this.domDays = document.getElementById("days");
+      this.domHours = document.getElementById("hours");
+      this.domMinutes = document.getElementById("minutes");
+      this.domSeconds = document.getElementById("seconds");
+      this.domEndTime = document.getElementById("end_time").innerHTML;
+      this.domOnEnd = document.getElementById("on-end-test");
+
       this.trackingElements = {
-        days: $("#days"),
-        hours: $("#hours"),
-        minutes: $("#minutes"),
-        seconds: $("#seconds"),
-        auction_end_time: $("#auction_end_time"),
-        buy_now_button: $("#buy_now_button"),
-        bid_now_form: $("#bid_now_form")
+        days: this.domDays,
+        hours: this.domHours,
+        minutes: this.domMinutes,
+        seconds: this.domSeconds
       };
-      this.countdown = new Countdown(this.trackingElements);
+
+      this.countdown = new Countdown(this.domEndTime, this.trackingElements);
+      this.countdown.onEnd(function() {
+        document.getElementById("on-end-test").innerHTML = "it changed!";
+      });
       this.countdown.start();
+
     });
 
-      it("updates countdown in the dom", function() {
+    it("updates the dom with end of event notice", function() {
 
-        expect($("#days", fixture.el).text()).toBe("days");
-        expect($("#hours", fixture.el).text()).toBe("hours");
-        expect($("#minutes", fixture.el).text()).toBe("minutes");
-        expect($("#seconds", fixture.el).text()).toBe("seconds");
-        expect($("#auction_end_time", fixture.el).text()).toEqual("Auction for this item is closed");
-    });
-
-    it("hidethe auction end time and buy now buttons", function() {
-
-      expect($('#buy_now_button').is(':hidden')).toBe(true);
-      expect($('#bid_now_form').is(':hidden')).toBe(true);
+      expect(this.domDays.innerHTML).toBe("");
+      expect(this.domHours.innerHTML).toBe("");
+      expect(this.domMinutes.innerHTML).toBe("");
+      expect(this.domSeconds.innerHTML).toBe("");
+      expect(this.domOnEnd.innerHTML).toBe("it changed!");
     });
   });
 });

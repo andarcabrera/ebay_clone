@@ -35,21 +35,20 @@
 <script>
 
 var trackingElements = {
-  days: $("#days"),
-  hours: $("#hours"),
-  minutes: $("#minutes"),
-  seconds: $("#seconds"),
-  auction_end_time: $("#auction_end_time"),
-  buy_now_button: $("#buy_now_button"),
-  bid_now_form: $("#bid_now_form")
+  days: document.getElementById("days"),
+  hours: document.getElementById("hours"),
+  minutes: document.getElementById("minutes"),
+  seconds: document.getElementById("seconds")
 };
 
-var countdown = new Countdown(trackingElements)
+var auctionEndTime = $("#auction_end_time").text();
+var countdown = new Countdown(auctionEndTime, trackingElements);
+countdown.onEnd(function() {
+  $("#auction_end_time").html("Auction for this item is closed");
+  $("#buy_now_button").hide();
+  $("#bid_now_form").hide();
+});
+
 countdown.start()
 
 </script>
-
-
-
-
-
