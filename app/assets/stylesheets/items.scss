@@ -45,7 +45,7 @@
 }
 .item-container {
   background-color: #F4DECB;
-  height: 18em;
+  height: 10em;
   margin-bottom: 1.5em;
 }
 
@@ -65,4 +65,17 @@
 .file-field-wrapper {
   width: 100px;
   margin: auto;
+  margin-bottom: 3em;
+}
+
+.new-item-form input {
+  display: block;
+  margin: auto;
+}
+
+.new-item-form label {
+  display: block;
+  margin: auto;
+  padding-bottom: 1em;
+  padding-top: 2em;
 }

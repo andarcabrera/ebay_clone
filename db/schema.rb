@@ -11,20 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160526160300) do
+ActiveRecord::Schema.define(version: 20160531113800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "bids", force: :cascade do |t|
+    t.integer  "item_id",                             null: false
+    t.integer  "bidder_id",                           null: false
+    t.decimal  "amount",     precision: 10, scale: 2, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "items", force: :cascade do |t|
-    t.string   "name",                       null: false
-    t.text     "description",                null: false
-    t.integer  "price",                      null: false
+    t.string   "name",                                                       null: false
+    t.text     "description",                                                null: false
+    t.decimal  "buy_it_now_price",   precision: 10, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image"
-    t.boolean  "available",   default: true, null: false
-    t.integer  "seller_id",                  null: false
+    t.boolean  "available",                                   default: true, null: false
+    t.integer  "seller_id",                                                  null: false
+    t.datetime "auction_end_time"
+    t.decimal  "starting_bid_price", precision: 10, scale: 2
   end
 
   create_table "purchases", force: :cascade do |t|

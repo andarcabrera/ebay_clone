@@ -36,6 +36,12 @@ describe UsersController do
       expect(User.last.username).to eq("pamplemousse")
       expect(User.count).to eq(1)
     end
+
+    it "it logs in the user"  do
+      post :create, :user => {username: "pamplemousse", email: "lacroix@example.com", password: "chosenone" }
+
+      expect(session[:user_id]).to eq(User.last.id)
+    end
   end
 
   context "new user is not created" do

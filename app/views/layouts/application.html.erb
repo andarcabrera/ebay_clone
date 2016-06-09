@@ -9,6 +9,7 @@
   </head>
   <body>
 
+    <%= flash[:not_found] %>
     <% if current_user %>
       <%= render "layouts/logged_in_user" %>
     <% else %>

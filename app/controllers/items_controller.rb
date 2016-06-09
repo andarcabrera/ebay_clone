@@ -1,5 +1,6 @@
 require 'item_marketplace/presenters/items_index_presenter'
 require 'item_marketplace/presenters/new_item_presenter'
+require 'item_marketplace/presenters/item_presenter'
 
 class ItemsController < ApplicationController
 
@@ -18,17 +19,30 @@ class ItemsController < ApplicationController
   def create
     item = Item.new(item_params)
     item.seller_id = current_user.id
-    @presenter = NewItemPresenter.new(item)
-    if @presenter.item.save
+    if item.valid?
+      item.save
+      if item.auctioned?
+        AuctionWorker.perform_in(auction_duration(item), item.id)
+      end
       redirect_to items_path
     else
+      @presenter = NewItemPresenter.new(item)
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    item = Item.find(params[:id])
+    @presenter = ItemPresenter.new(item)
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :price, :image)
+    params.require(:item).permit(:name, :description, :buy_it_now_price, :starting_bid_price, :auction_end_time, :image)
+  end
+
+  def auction_duration(item)
+    item.auction_end_time - Time.now.utc
   end
 end

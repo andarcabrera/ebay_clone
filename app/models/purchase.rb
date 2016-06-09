@@ -11,7 +11,7 @@ class Purchase < ActiveRecord::Base
 
   def available_item
     if item_id && !Item.find(item_id).available
-      errors.add(:available_item, "this item is no longer available")
+      errors.add(:available_item, "This item is no longer available.")
     end
   end
 end
