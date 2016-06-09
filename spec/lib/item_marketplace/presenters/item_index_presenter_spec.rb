@@ -3,13 +3,17 @@ require 'item_marketplace/presenters/items_index_presenter'
 
 describe ItemsIndexPresenter do
 
-  let(:available_item) { double 'available_item', available: true }
-  let(:unavailable_item) { double 'unavailable_item', available: false }
-  let(:items) { [available_item, unavailable_item] }
-  let(:presenter) { ItemsIndexPresenter.new(items) }
+  let(:tags) {double 'tags' }
+  let(:items) { double 'items' }
+  let(:presenter) { ItemsIndexPresenter.new(items, tags) }
 
   it "returns a collection of items" do
 
     expect(presenter.items).to eq(items)
+  end
+
+  it "returns a colleciton  of tags" do
+
+    expect(presenter.tags).to eq(tags)
   end
 end

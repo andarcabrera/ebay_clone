@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @presenter = ItemsIndexPresenter.new(Item.available.limit(100))
+    @presenter = ItemsIndexPresenter.new(Item.available.limit(100), Tag.all)
   end
 
   def new
