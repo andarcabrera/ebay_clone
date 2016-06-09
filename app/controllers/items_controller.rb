@@ -22,8 +22,7 @@ class ItemsController < ApplicationController
     item.seller_id = current_user.id
     if item.valid?
       item.save
-      tag = Tag.find_or_create_by(item_params[:tags_attributes][0])
-      item.tags << tag
+      create_tags(item)
       if item.auctioned?
         AuctionWorker.perform_in(auction_duration(item), item.id)
       end
@@ -42,10 +41,20 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :buy_it_now_price, :starting_bid_price, :auction_end_time, :image, tags_attributes: [:id, :name])
+    params.require(:item).permit(:name, :description, :buy_it_now_price, :starting_bid_price, :auction_end_time, :image, tags_attributes: [:name])
   end
 
   def auction_duration(item)
     item.auction_end_time - Time.now.utc
+  end
+
+  def create_tags(item)
+    if params[:tags]
+      tag_names = params[:tags].split(",")
+      tag_names.each do |name|
+        tag = Tag.find_or_create_by(name: name.strip)
+        item.tags << tag
+      end
+    end
   end
 end
