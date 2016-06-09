@@ -10,15 +10,6 @@ function setFixtures(endTime) {
           + '<p id="on-end-test">change on end</p>');
 }
 
-function getElements() {
-      this.domDays = document.getElementById("days");
-      this.domHours = document.getElementById("hours");
-      this.domMinutes = document.getElementById("minutes");
-      this.domSeconds = document.getElementById("seconds");
-      this.domEndTime = document.getElementById("end_time").innerHTML;
-      this.domOnEnd = document.getElementById("on-end-test");
-}
-
 function initializeCountdown(endTime, trackingElements){
   var countdown = new Countdown(endTime, trackingElements);
   countdown.onEnd(function() {
@@ -34,18 +25,19 @@ function TrackingElements() {
   this.seconds = document.getElementById("seconds")
 }
 
+function setUpTests(endTime) {
+  setFixtures(endTime);
+  trackingElements = new TrackingElements();
+  domEndTime = document.getElementById("end_time").innerHTML;
+  domOnEnd = document.getElementById("on-end-test");
+  initializeCountdown(domEndTime, trackingElements);
+}
+
 describe("Coundown", function() {
   describe("auction is on going", function() {
     beforeEach(function(){
       endTime = Date.now() + 237300000;
-      setFixtures(endTime);
-      trackingElements = new TrackingElements();
-
-      this.domEndTime = document.getElementById("end_time").innerHTML;
-      this.domOnEnd = document.getElementById("on-end-test");
-
-      initializeCountdown(this.domEndTime, trackingElements);
-
+      setUpTests(endTime);
     });
 
     it("updates countdown in the dom", function() {
@@ -58,21 +50,14 @@ describe("Coundown", function() {
 
     it("does not modify the on end DOM element", function() {
 
-      expect(this.domOnEnd.innerHTML).toBe("change on end");
+      expect(domOnEnd.innerHTML).toBe("change on end");
     });
   });
 
   describe("auction is closed", function() {
     beforeEach(function (){
       endTime = Date.now() - 237300000;
-      setFixtures(endTime)
-
-      trackingElements = new TrackingElements();
-      this.domEndTime = document.getElementById("end_time").innerHTML;
-      this.domOnEnd = document.getElementById("on-end-test");
-
-      initializeCountdown(this.domEndTime, this.trackingElements);
-
+      setUpTests(endTime)
     });
 
     it("updates the dom with end of event notice", function() {
@@ -81,7 +66,7 @@ describe("Coundown", function() {
       expect(document.getElementById("hours").innerHTML).toBe("");
       expect(document.getElementById("minutes").innerHTML).toBe("");
       expect(document.getElementById("seconds").innerHTML).toBe("");
-      expect(this.domOnEnd.innerHTML).toBe("it changed!");
+      expect(domOnEnd.innerHTML).toBe("it changed!");
     });
   });
 });
