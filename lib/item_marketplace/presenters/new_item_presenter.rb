@@ -9,4 +9,8 @@ class NewItemPresenter
   def errors
     @item.errors.full_messages
   end
+
+  def tags_build
+    @item.tags.build
+  end
 end

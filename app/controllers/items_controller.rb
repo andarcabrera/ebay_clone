@@ -14,6 +14,7 @@ class ItemsController < ApplicationController
 
   def new
     @presenter = NewItemPresenter.new(Item.new)
+    @presenter.tags_build
   end
 
   def create
@@ -21,6 +22,8 @@ class ItemsController < ApplicationController
     item.seller_id = current_user.id
     if item.valid?
       item.save
+      tag = Tag.find_or_create_by(item_params[:tags_attributes][0])
+      item.tags << tag
       if item.auctioned?
         AuctionWorker.perform_in(auction_duration(item), item.id)
       end
@@ -39,7 +42,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :buy_it_now_price, :starting_bid_price, :auction_end_time, :image)
+    params.require(:item).permit(:name, :description, :buy_it_now_price, :starting_bid_price, :auction_end_time, :image, tags_attributes: [:id, :name])
   end
 
   def auction_duration(item)

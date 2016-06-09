@@ -8,6 +8,7 @@ class Item < ActiveRecord::Base
   has_many :bids
   has_many :taggings
   has_many :tags, through: :taggings
+  accepts_nested_attributes_for :tags
 
   mount_uploader :image, ImageUploader
 

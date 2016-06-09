@@ -7,7 +7,11 @@
     <%= f.label :name %>
     <%= f.text_field :name, size: 60 %>
     <%= f.label :description %>
-    <%= f.text_area :description, :cols => 60, :rows => 10 %>
+    <%= f.text_area :description, :cols => 60, :rows => 5 %>
+    <%= f.fields_for :tags do |field| %>
+      <%= field.label :tags %>
+      <%= field.text_area :name, :cols => 60, :rows => 3 %>
+    <% end %>
     <%= f.label :buy_it_now_price %>
     <%= f.text_field :buy_it_now_price, size: 60 %>
     <%= f.label :starting_bid_price %>
