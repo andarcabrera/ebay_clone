@@ -3,5 +3,5 @@ rvm:
   - 2.2.1
 
 before_script:
-  RAILS_ENV=test bundle exec rake db:create
-  bundle exec teaspoon
+  - RAILS_ENV=test bundle exec rake db:create
+  - bundle exec teaspoon
