@@ -12,7 +12,7 @@ describe ItemsIndexPresenter do
     expect(presenter.items).to eq(items)
   end
 
-  it "returns a colleciton  of tags" do
+  it "returns a collection of tags" do
 
     expect(presenter.tags).to eq(tags)
   end

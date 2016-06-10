@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe TagsController do
   let(:tag) { Tag.create(name: "yummy") }
+
   context "show page is requested" do
     it "a valid tag is requested" do
       get :show, :id => tag.id

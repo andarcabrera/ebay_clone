@@ -14,7 +14,6 @@ class ItemsController < ApplicationController
 
   def new
     @presenter = NewItemPresenter.new(Item.new)
-    @presenter.tags_build
   end
 
   def create
@@ -41,7 +40,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :buy_it_now_price, :starting_bid_price, :auction_end_time, :image, tags_attributes: [:name])
+    params.require(:item).permit(:name, :description, :buy_it_now_price, :starting_bid_price, :auction_end_time, :image)
   end
 
   def auction_duration(item)
