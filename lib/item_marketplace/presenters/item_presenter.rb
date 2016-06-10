@@ -63,4 +63,8 @@ class ItemPresenter
   def auction_ongoing
     auction_end_time && (auction_end_time - Time.now) >= 0
   end
+
+  def tags
+    @item.tags
+  end
 end

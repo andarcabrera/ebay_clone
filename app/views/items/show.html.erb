@@ -2,6 +2,11 @@
   <div class="col-xs-12 col-md-6">
     <div class="title-price"> <strong>Name: </strong><%= @presenter.name %> </div>
     <p> <strong> Description:</strong>  <%= @presenter.description %></p>
+    <p> <strong> Tags:</strong>
+    <% @presenter.tags.each do |tag| %>
+      <span> <%= link_to "#" + tag.name, tag_path( id: tag.id)%> </span>
+    <% end %>
+    </p>
     <p> <strong>Buy It Now Price: $<%= @presenter.buy_it_now_price %></strong> </p>
     <%= button_to "Buy Now", create_purchase_path(item_id: @presenter.id), class: "btn btn-xs btn-buy-now", id: "buy_now_button" %>
   </div>

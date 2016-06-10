@@ -4,7 +4,7 @@ require 'item_marketplace/presenters/item_presenter'
 describe ItemPresenter do
 
   let(:bid) { double 'bid' }
-  let(:item) { double 'item', id: 2, name: "table", description: "pong", buy_it_now_price: 11, starting_bid_price: 1, highest_bid: 7 }
+  let(:item) { double 'item', id: 2, name: "table", description: "pong", buy_it_now_price: 11, starting_bid_price: 1, highest_bid: 7, tags: ["sun", "fun"] }
   let(:presenter) { ItemPresenter.new(item, bid) }
 
   it "returns a new item" do
@@ -45,6 +45,11 @@ describe ItemPresenter do
    it "returns the item highest_bid" do
 
     expect(presenter.highest_bid).to eq(item.highest_bid)
+   end
+
+   it "returns the item tags" do
+
+    expect(presenter.tags).to eq(item.tags)
    end
 
    it "returns the item auction_end_time" do
