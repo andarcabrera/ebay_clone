@@ -1,6 +1,7 @@
 require 'item_marketplace/presenters/items_index_presenter'
 require 'item_marketplace/presenters/new_item_presenter'
 require 'item_marketplace/presenters/item_presenter'
+require 'item_marketplace/create_item'
 
 class ItemsController < ApplicationController
 
@@ -9,7 +10,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @presenter = ItemsIndexPresenter.new(Item.available.limit(100))
+    @presenter = ItemsIndexPresenter.new(Item.available.limit(100), Tag.limit(100))
   end
 
   def new
@@ -17,13 +18,8 @@ class ItemsController < ApplicationController
   end
 
   def create
-    item = Item.new(item_params)
-    item.seller_id = current_user.id
+    item = CreateItem.new(item_params, current_user, tag_names).call
     if item.valid?
-      item.save
-      if item.auctioned?
-        AuctionWorker.perform_in(auction_duration(item), item.id)
-      end
       redirect_to items_path
     else
       @presenter = NewItemPresenter.new(item)
@@ -42,7 +38,9 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name, :description, :buy_it_now_price, :starting_bid_price, :auction_end_time, :image)
   end
 
-  def auction_duration(item)
-    item.auction_end_time - Time.now.utc
+  def tag_names
+    if params[:tags]
+      params[:tags].split(",").map(&:strip)
+    end
   end
 end

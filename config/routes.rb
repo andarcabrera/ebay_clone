@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   get  "/logout"                            =>  "sessions#destroy"
   post "/items/:item_id/bids"               =>  "bids#create", as: 'create_bid'
   get "/items/:item_id/bids/:id"            =>  "bids#show"
+  get "/tags/:id"                           =>  "tags#show", as: 'tag'
 end

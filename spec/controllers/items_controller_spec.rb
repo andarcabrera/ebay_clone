@@ -39,7 +39,11 @@ describe ItemsController do
 
   context "new item is created successfully" do
     let(:user) { User.create(username: "dreamteam", email: "us@dream.com", password_hash: "zzzzzzz") }
-    let(:item_params) { {name: "ping-pong paddle", description: "you beat Alex with it", buy_it_now_price: 1, user_id: user.id} }
+    let(:item_params) { {name: "ping-pong paddle",
+                         description: "you beat Alex with it",
+                         buy_it_now_price: 1,
+                         user_id: user.id} }
+
     before(:each) do
       login_user(user)
     end
@@ -62,6 +66,20 @@ describe ItemsController do
 
       expect(Item.first.name).to eq("ping-pong paddle")
       expect(Item.count).to eq(1)
+    end
+
+    it "creates an item with multiple tags" do
+      post :create, :item => item_params, :tags => "joy, fun"
+
+      expect(Item.first.tags.count).to eq(2)
+      expect(Item.first.tags[0].name).to eq("joy")
+      expect(Item.first.tags[1].name).to eq("fun")
+    end
+
+    it "it creates an item without any tags" do
+      post :create, :item => item_params
+
+      expect(Item.first.tags.count).to eq(0)
     end
   end
 

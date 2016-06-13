@@ -12,11 +12,8 @@
 </div>
 
 <div class="container">
-  <h3 class="text-center">Tags</h3>
   <p class="text-center">
-  <% @presenter.tags.each do |tag| %>
-   <span> <%= link_to "#" + tag.name, tag_path( id: tag.id)%> </span>
-  <% end %>
+    <span> <%= "TAG: #" + @presenter.name %> </span>
   </p>
 </div>
 

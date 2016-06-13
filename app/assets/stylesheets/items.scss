@@ -19,13 +19,6 @@
   border-color: #F4DEC8;
 }
 
-.btn-buy-now {
-  background-color: #49274A;
-  color: #F4DEC8;
-  font-weight: bold;
-  border-color: #94618E;
-}
-
 .items-index-image-container {
   border-color: gray;
   border-style: ridge;
@@ -68,7 +61,7 @@
   margin-bottom: 3em;
 }
 
-.new-item-form input {
+ form#new_item.new_item input{
   display: block;
   margin: auto;
 }
@@ -79,3 +72,12 @@
   padding-bottom: 1em;
   padding-top: 2em;
 }
+
+.btn-buy-now {
+  background-color: #49274A;
+  color: #F4DEC8;
+  font-weight: bold;
+  border-color: #94618E;
+  display: inline-block;
+}
+
