@@ -7,3 +7,4 @@ before_script:
 
 script:
   - bundle exec teaspoon
+  - bundle exec rspec
